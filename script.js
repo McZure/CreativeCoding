@@ -6,7 +6,8 @@ function callFirst(){
   bg = [200, 200, 200]
 }
 setTimeout(callFirst, 2000) //延迟2000ms运行function
-
+setTimeout(() => {console.log("hello, yet again!")
+}, 6000)
 setTimeout(
   function(){
     console.log("hello, again!")
