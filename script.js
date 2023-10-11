@@ -26,14 +26,19 @@ function setup() {
 
 
 function draw() {
-  background(bg)
-  if(myBool){}
+  background(200)
+  //if(myBool){}
 }
-
+var img
 async function apiRequest(){
   let request = await fetch("https://dog.ceo/api/breeds/image/random")
   console.log(request)
-  let data = request.json()
+
+  let data = await request.json()
   console.log(data)
-  //imgURL = request.url
+
+  imgURL = data.message
+  console.log(imgURL)
+
+  image = loadImage(imgURL)
 }
