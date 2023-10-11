@@ -20,16 +20,24 @@ let request = fetch("https://dog.ceo/api/breeds/image/random")
 
 console.log(request)
 
+var img
+var imgURL
 function setup() {
   createCanvas(600, 600)
+  background(200)
+  apiRequest()
 }
 
 
 function draw() {
   background(200)
   //if(myBool){}
+  if(img != undefined){
+    image(img, 0, 0)
+  }
+  
 }
-var img
+
 async function apiRequest(){
   let request = await fetch("https://dog.ceo/api/breeds/image/random")
   console.log(request)
@@ -40,5 +48,5 @@ async function apiRequest(){
   imgURL = data.message
   console.log(imgURL)
 
-  image = loadImage(imgURL)
+  img = loadImage(imgURL)
 }
