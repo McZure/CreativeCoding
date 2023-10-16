@@ -311,6 +311,10 @@ class axolotl{
           // The eyes will show current weather
           if(rain){
             textSize(70)
+            text("☂", -30, 5)
+          }
+          else if(!rain && !snowfall && cloud >= 50){
+            textSize(70)
             text("☁", -30, 5)
           }
           else if(snowfall){
@@ -592,9 +596,7 @@ function draw() {
 async function apiRequest(){
   let request = await fetch("https://api.open-meteo.com/v1/forecast?latitude=40.6501&longitude=-73.9496&current=temperature_2m,is_day,rain,snowfall,cloudcover,windspeed_10m&hourly=temperature_2m,rain")
   
-  console.log(request)
   let data = await request.json()
-  console.log(data)
   
   rain = data.current.rain
   temp = data.current.temperature_2m
