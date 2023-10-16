@@ -1,4 +1,4 @@
-//comment out 快捷键：Ctrl+K 然后 Ctrl+C  uncomment：Ctrl+K 然后 Ctrl+U
+//comment out 快捷键：Ctrl+/  uncomment：Ctrl+K 然后 Ctrl+U
 // let bg=[0, 0, 0]
 // myBool = false
 // function callFirst(){
