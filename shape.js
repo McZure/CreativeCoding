@@ -1,5 +1,12 @@
 let hue = chroma.hsl(0, 1, 0.5)
 let scale = chroma.scale(["yellow", "blue"])
+let shape = {
+  x: 0,
+  y: 0,
+  w: 100,
+  h: 100,
+  c: [0, 0, 200]
+}
 // HUE 0 ... 360
 // Saturation 0 ... 1
 // Lightness 0 ... 1
@@ -20,6 +27,9 @@ function setup() {
       fill(scale(i/width).rgb())
       ellipse(i, 250, 50, 50)
     }
+
+    fill(shape.c)
+    rect(shape.x, shape.y, shape.w, shape.h)
   }
   
   // chroma.scale(['yellow', 'blue']) 制作渐变色
