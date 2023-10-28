@@ -27,7 +27,7 @@ class axolotl{
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
-    if (gill_type%7 == 0){
+    if (gill_type%10 == 0){
       // 1st type of gill
       // >(0_0)<
       beginShape()
@@ -47,7 +47,7 @@ class axolotl{
       vertex(this.x+120 + slight_Xm, this.y+40 + 1.6*slight_Ym)
       endShape()
     }
-    else if(gill_type%7 == 1){
+    else if(gill_type%10 == 1){
       // 2nd type of gill
       // ≡(0_0)≡
       quad(this.x-168 + slight_Xm, this.y-30, this.x+168 - slight_Xm, this.y-30, this.x+152 - slight_Xm, this.y-10, this.x-152 + slight_Xm, this.y-10)
@@ -55,7 +55,7 @@ class axolotl{
       fill(_clr2[0],_clr2[1],_clr2[2])
       quad(this.x-140 - slight_Xm, this.y-9, this.x+140 + slight_Xm, this.y-9, this.x+124 + slight_Xm, this.y+9, this.x-124 - slight_Xm, this.y+9)
     }
-    else if(gill_type%7 == 2){
+    else if(gill_type%10 == 2){
       // 3rd type of gill
       // ⋙(0_0)⋘
       push()
@@ -90,7 +90,7 @@ class axolotl{
       quad(160, 0, 190, -18, 220, 0, 190, 18)
       pop()
     }
-    else if(gill_type%7 == 3){
+    else if(gill_type%10 == 3){
       // 4th type of gill
       // ◖(0_0)◗
       ellipse(this.x+80, this.y+slight_Ym, 120+2*slight_Xm)
@@ -106,7 +106,7 @@ class axolotl{
       pop()
       line(119+this.x, this.y+slight_Ym, -119+this.x, this.y+slight_Ym)
     }
-    else if(gill_type%7 == 4){
+    else if(gill_type%10 == 4){
       // 5th type of gill
       // ◥(0_0)◤
       push()
@@ -128,7 +128,7 @@ class axolotl{
       triangle(160 + slight_Xm, 50 + slight_Ym, 10, 50, 10, 0)
       pop()
     }
-    else if(gill_type%7 == 5){
+    else if(gill_type%10 == 5){
       // 6th type of gill
       // ►(0_0)◄
       push()
@@ -150,7 +150,7 @@ class axolotl{
       triangle(0, 0, 190 + slight_Xm, 30+ slight_Ym, 170+ slight_Xm, 70)
       pop()
     }
-    else if(gill_type%7 == 6){
+    else if(gill_type%10 == 6){
       // 7th type of gill
       // ʚ(0_0)ɞ
       push()
@@ -172,6 +172,74 @@ class axolotl{
       ellipse(90, -40, 50+slight_Ym, 80+slight_Xm)
       ellipse(50, -90, 60+slight_Ym, 90+slight_Xm)
       pop()
+    }
+    else if(gill_type%10 == 7){
+      // 8th type of gill
+      // ⋱(0_0)⋰
+      fill(hue.rgb())
+      push()
+      translate(this.x, this.y)
+      rect(80+frameCount%15, 20+ slight_Ym, 50, 25)
+      rect(125+(10+frameCount)%15, -5+ slight_Ym, 25)
+      rect(150+(20+frameCount)%15, -20+ slight_Ym, 15)
+      rect(-130-frameCount%15, 20+ slight_Ym, 50, 25)
+      rect(-150-(10+frameCount)%15, -5+ slight_Ym, 25)
+      rect(-165-(20+frameCount)%15, -20+ slight_Ym, 15)
+      hue = chroma.hsl(frameCount % 360, 1, 0.5)
+      fill(hue.rgb())
+      rect(65+frameCount%15, -15+ slight_Ym, 50, 25)
+      rect(110+(10+frameCount)%15, -40+ slight_Ym, 25)
+      rect(130+(20+frameCount)%15, -60+ slight_Ym, 20)
+      rect(-115-frameCount%15, -15+ slight_Ym, 50, 25)
+      rect(-135-(10+frameCount)%15, -40+ slight_Ym, 25)
+      rect(-150-(20+frameCount)%15, -60+ slight_Ym, 20)
+      hue = chroma.hsl(10+frameCount % 360, 1, 0.5)
+      fill(hue.rgb())
+      rect(50+frameCount%15, -55+ slight_Ym, 50, 20)
+      rect(95+(10+frameCount)%15, -70+ slight_Ym, 15)
+      rect(-100-frameCount%15, -55+ slight_Ym, 50, 20)
+      rect(-110-(10+frameCount)%15, -70+ slight_Ym, 15)
+      pop()
+    }
+    else if(gill_type%10 == 8){
+      // 9th type of gill
+      // ∻(0_0)∻
+      push()
+      translate(this.x, this.y)
+      for(var i = 1; i < 15; i++){
+        fill(face_clr[0]+20,face_clr[1]+20,face_clr[2]+20)
+        ellipse(-200+15*i, slight_Ym+sin(i*cos(frameCount/15)) * 8, 20+i/2)
+        ellipse(200-15*i, slight_Ym+sin(i*cos(frameCount/15)) * 8, 20+i/2)
+
+        fill(face_clr[0]-30,face_clr[1]-30,face_clr[2]-30)
+        ellipse(-180+15*i, 40 + slight_Ym-sin(i*cos(frameCount/15)) * 8, 20-i/2)
+        ellipse(180-15*i, 40 +slight_Ym+sin(i*cos(frameCount/15)) * 8, 20-i/2)
+        ellipse(-180+15*i, -40 + slight_Ym-sin(i*cos(frameCount/15)) * 8, 20-i/2)
+        ellipse(180-15*i, -40 +slight_Ym+sin(i*cos(frameCount/15)) * 8, 20-i/2)
+        
+        fill(_clr1[0],_clr1[1],_clr1[2])
+        ellipse(-160+15*i, 20 + slight_Ym-sin(i*cos(frameCount/15)) * 8, 20-i/2)
+        ellipse(160-15*i, 20 +slight_Ym+sin(i*cos(frameCount/15)) * 8, 20-i/2)
+        ellipse(-160+15*i, -20 + slight_Ym-sin(i*cos(frameCount/15)) * 8, 20-i/2)
+        ellipse(160-15*i, -20 +slight_Ym+sin(i*cos(frameCount/15)) * 8, 20-i/2)
+        // Bubbles
+        randBubble(-200+15*i, slight_Ym+sin(i*cos(frameCount/15)) * 8)
+        randBubble(200-15*i, slight_Ym+sin(i*cos(frameCount/15)) * 8)
+        randBubble(-180+15*i, 40 + slight_Ym+sin(i*cos(frameCount/15)) * 8)
+        randBubble(180-15*i, 40 +slight_Ym+sin(i*cos(frameCount/15)) * 8)
+        randBubble(-160+15*i, 20 + slight_Ym+sin(i*cos(frameCount/15)) * 8)
+        randBubble(160-15*i, 20 +slight_Ym+sin(i*cos(frameCount/15)) * 8)
+        randBubble(-180+15*i, -40 + slight_Ym+sin(i*cos(frameCount/15)) * 8)
+        randBubble(180-15*i, -40 +slight_Ym+sin(i*cos(frameCount/15)) * 8)
+        randBubble(-160+15*i, -20 + slight_Ym+sin(i*cos(frameCount/15)) * 8)
+        randBubble(160-15*i, -20 +slight_Ym+sin(i*cos(frameCount/15)) * 8)
+    
+      }
+      pop()
+    }
+    else if(gill_type%10 == 9){
+      // 10th type of gill
+      // ∻(0_0)∻
     }
   }
   
@@ -715,9 +783,9 @@ function draw() {
     eyes_clr[1] = random(60, 200)
     eyes_clr[2] = random(60, 200)
     mouth_type= int(random()*100)
-    mouth_clr[0] = random(110, 210)
-    mouth_clr[1] = random(110, 210)
-    mouth_clr[2] = random(110, 210)
+    mouth_clr[0] = random(130, 220)
+    mouth_clr[1] = random(130, 220)
+    mouth_clr[2] = random(130, 220)
   }
   noStroke()
   // Call functions to draw the axolotl
@@ -748,5 +816,12 @@ function keyPressed() {
   } 
   else{
     weather = true
+  }
+}
+function randBubble(x, y){
+  fill(random(255), random(255), random(255), 200)
+  for(var j= 0; j< int(random(0, 5)); j++){
+    var sign = pow(-1, int(random(0, 100)))
+    ellipse(x+ sign*random(0, 20),y + sign*random(0, 20), random(0, 8))
   }
 }
