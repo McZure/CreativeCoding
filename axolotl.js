@@ -134,20 +134,20 @@ class axolotl{
       push()
       translate(this.x, this.y)
       fill(hue.rgb())
-      triangle(0, 0, -190 + slight_Xm, -45+ slight_Ym, -170+ slight_Xm, -80)
+      triangle(0, 0, -200 + slight_Xm, -30+ slight_Ym, -200+ slight_Xm, -70)
       fill(_clr1[0],_clr1[1],_clr1[2])
-      triangle(0, 0, -200 + slight_Xm, -20+ slight_Ym, -200+ slight_Xm, 20)
+      triangle(0, 0, -200 + slight_Xm, -20+ slight_Ym, -190+ slight_Xm, 20+ slight_Ym)
       hue = chroma.hsl(20+frameCount % 360, 1, 0.8)
       fill(hue.rgb())
-      triangle(0, 0, -190 + slight_Xm, 40+ slight_Ym, -170+ slight_Xm, 70)
+      triangle(0, 0, -190 + slight_Xm, 30+ slight_Ym, -170+ slight_Xm, 70)
 
       fill(_clr1[0],_clr1[1],_clr1[2])
-      triangle(0, 0, 190 + slight_Xm, -45+ slight_Ym, 170+ slight_Xm, -80)
+      triangle(0, 0, 200 + slight_Xm, -30+ slight_Ym, 200+ slight_Xm, -70)
       hue = chroma.hsl(40+frameCount % 360, 1, 0.8)
       fill(hue.rgb())
-      triangle(0, 0, 200 + slight_Xm, -20+ slight_Ym, 200+ slight_Xm, 20)
+      triangle(0, 0, 200 + slight_Xm, -20+ slight_Ym, 190+ slight_Xm, 20+ slight_Ym)
       fill(_clr1[0],_clr1[1],_clr1[2])
-      triangle(0, 0, 190 + slight_Xm, 40+ slight_Ym, 170+ slight_Xm, 70)
+      triangle(0, 0, 190 + slight_Xm, 30+ slight_Ym, 170+ slight_Xm, 70)
       pop()
     }
     else if(gill_type%7 == 6){
@@ -311,7 +311,6 @@ class axolotl{
         }
       }
       
-      
       // Weather
       if(toEyeDist < 30){
         if(weather){
@@ -350,6 +349,7 @@ class axolotl{
         }
       }
       else if(dist(mouseX, mouseY, this.x, this.y-150) < 60 && weather){
+        // Important!!! Avoid conflicts
       }
       else{
         // Eyebrows
@@ -359,8 +359,8 @@ class axolotl{
         rect(50+slight_Xm, -45+slight_Ym, 10, 10)
         // Eyes
         fill("white")
-        rect(-40+slight_Xm, -30+slight_Ym, 10, 30)
-        rect(30+slight_Xm, -30+slight_Ym, 10, 30)
+        rect(-40+slight_Xm, -25+slight_Ym, 10, 30-toEyeDist/50)
+        rect(30+slight_Xm, -25+slight_Ym, 10, 30-toEyeDist/50)
       }
       fill(face_clr[0]-20,face_clr[1]-20,face_clr[2]-20)
       ellipse(-73, -20, 40, 75)
@@ -507,10 +507,10 @@ class axolotl{
     else if(mouth_type%7 == 1){
       push()
       translate(this.x, this.y)
-      ellipse(30, 50+slight_Ym, 86, 50)
-      ellipse(-30, 50+slight_Ym, 86, 50)
+      ellipse(30, 50+slight_Ym, 86, 50+slight_Ym)
+      ellipse(-30, 50+slight_Ym, 86, 50+slight_Ym)
       fill(face_clr[0],face_clr[1],face_clr[2])
-      rect(-80, 60, 160, 30)
+      rect(-80, 55+slight_Ym, 160, 30)
       pop()
     }
     else if(mouth_type%7 == 2){
