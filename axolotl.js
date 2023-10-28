@@ -25,6 +25,7 @@ class axolotl{
     noStroke()
     fill(_clr1[0],_clr1[1],_clr1[2])
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
+    var toEyeDist = dist(mouseX, mouseY, this.x, this.y)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
     if (gill_type%10 == 0){
@@ -239,7 +240,59 @@ class axolotl{
     }
     else if(gill_type%10 == 9){
       // 10th type of gill
-      // ∻(0_0)∻
+      // ⦩(0_0)⦨
+      push()
+      translate(this.x, this.y)
+      for(var i=0; i <25; i++){
+        fill(face_clr[0],face_clr[1],face_clr[2])
+        push()
+        translate(-90, -15)
+        rotate(i*PI/100)
+        ellipse(-20, 0, 50 + random(0, 50)+toEyeDist/10, 30)
+        pop()  
+        push()
+        translate(90, -15)
+        rotate(-i*PI/100)
+        ellipse(20, 0, 50 + random(0, 40)+toEyeDist/10, 30)
+        pop()
+        
+        fill(255-face_clr[0]+50,255-face_clr[1]+50,255-face_clr[2]+50)
+        push()
+        translate(-90, 20)
+        rotate(-i*PI/100)
+        ellipse(-20, 0, 50 + random(0, 40), 20)
+        pop()  
+        push()
+        translate(90, 20)
+        rotate(i*PI/100)
+        ellipse(20, 0, 50 + random(0, 40), 20)
+        pop()
+      }
+      for(var i=0; i <25; i++){
+        fill(_clr1[0],_clr1[1],_clr1[2])
+        push()
+        translate(-90, 0)
+        rotate(i*PI/100)
+        ellipse(-20, 0, 90 + random(0, 40)+toEyeDist/15, 30)
+        pop()  
+        push()
+        translate(90+slight_Xm, 0)
+        rotate(i*PI/100)
+        ellipse(20, 0, 90+ random(0, 40), 30)
+        pop()
+        
+        push()
+        translate(-90+slight_Xm, 0)
+        rotate(-i*PI/100)
+        ellipse(-20, 0, 90 + random(0, 40), 30)
+        pop()  
+        push()
+        translate(90, 0)
+        rotate(-i*PI/100)
+        ellipse(20, 0, 90 + random(0, 40)+toEyeDist/15, 30)
+        pop()
+      }
+      pop()
     }
   }
   
