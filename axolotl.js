@@ -608,11 +608,12 @@ class axolotl{
    mouth(mouth_type, _clr, face_clr){
     noStroke()
     fill(_clr[0], _clr[1], _clr[2])
+    var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
     var toEyeDist = dist(mouseX, mouseY, this.x, this.y)
-    
-    if(mouth_type%7 == 0){
+
+    if(mouth_type%10 == 0){
       // 1st type of gill
       // Reptile mouth
       push()
@@ -628,7 +629,7 @@ class axolotl{
       line(9, 40+slight_Ym, 7-toEyeDist/300 , 42+slight_Ym)
       pop()
     }
-    else if(mouth_type%7 == 1){
+    else if(mouth_type%10 == 1){
       // 2nd type of gill
       // Opened mouth
       push()
@@ -639,20 +640,21 @@ class axolotl{
       rect(-80, 55+slight_Ym, 160, 30)
       pop()
     }
-    else if(mouth_type%7 == 2){
+    else if(mouth_type%10 == 2){
       // 3rd type of gill
       // Calm mouth
       push()
       translate(this.x, this.y)
       stroke(_clr[0], _clr[1], _clr[2])
       strokeWeight(4)
-      line(-10, 50+slight_Ym, -6+toEyeDist/300, 53+slight_Ym)
-      line(10, 50+slight_Ym, 6-toEyeDist/300 , 53+slight_Ym)
+      line(-10, 46+slight_Ym, -6+toEyeDist/300, 50+slight_Ym)
+      line(10, 46+slight_Ym, 6-toEyeDist/300 , 50+slight_Ym)
+      stroke(255-_clr[0], 255-_clr[1], 255-_clr[2])
       strokeWeight(8)
-      line(-60, 65+slight_Ym/2, 60, 65+slight_Ym/2)
+      line(-55-toEyeDist/50, 65+slight_Ym/2, 55+toEyeDist/50, 65-slight_Ym/2)
       pop()
     }
-    else if(mouth_type%7 == 3){
+    else if(mouth_type%10 == 3){
       // 4th type of gill
       // Smile mouth
       noFill();
@@ -664,7 +666,7 @@ class axolotl{
       strokeWeight(8)
       arc(this.x, this.y+20, 130+slight_Xm, 110+slight_Ym, radians(25), radians(140), OPEN)
     }
-    else if(mouth_type%7 == 4){
+    else if(mouth_type%10 == 4){
       // 5th type of gill
       // Bird mouth
       push()
@@ -678,7 +680,7 @@ class axolotl{
       line(10, 24+slight_Ym, 10-toEyeDist/300 , 27+slight_Ym)
       pop()
     }
-    else if(mouth_type%7 == 5){
+    else if(mouth_type%10 == 5){
       // 6th type of gill
       // Rabbit mouth
       push()
@@ -697,7 +699,7 @@ class axolotl{
       line(10, 30+slight_Ym, 6-toEyeDist/300 , 33+slight_Ym)
       pop()
     }
-    else if(mouth_type%7 == 6){
+    else if(mouth_type%10 == 6){
       // 7th type of gill
       // Bucktoothed mouth
       push()
@@ -709,6 +711,58 @@ class axolotl{
       rect(-30+slight_Xm, 35+slight_Ym, 60, 20-toEyeDist/180, 0, 0, 6, 6)
       fill('#D1D1D1')
       rect(-2+slight_Xm, 35+slight_Ym, 4, 20-toEyeDist/180)
+      pop()
+    }
+    else if(mouth_type%10 == 7){
+      // 8th type of gill
+      // Grinning mouth
+      push()
+      translate(this.x, this.y)
+      fill('#D1D1D1')
+      rect(-60, 35+slight_Ym, 120, 35-toEyeDist/20, 10, 10, 10, 10)
+      fill('white')
+      rect(-60, 38+slight_Ym, 120, 32-toEyeDist/20, 10, 10, 10, 10)
+      fill('#D1D1D1')
+      rect(-32+slight_Xm/2, 35+slight_Ym, 4, 35-toEyeDist/20)
+      rect(-2+slight_Xm/2, 35+slight_Ym, 4, 35-toEyeDist/20)
+      rect(28+slight_Xm/2, 35+slight_Ym, 4, 35-toEyeDist/20)
+      noFill();
+      stroke(_clr[0], _clr[1], _clr[2])
+      strokeWeight(4)
+      line(-9, 26+slight_Ym, -7+toEyeDist/300, 28+slight_Ym)
+      line(9, 26+slight_Ym, 7-toEyeDist/300 , 28+slight_Ym)
+      pop()
+    }
+    else if(mouth_type%10 == 8){
+      // 9th type of gill
+      // Heart mouth
+      push()
+      translate(this.x, this.y)
+      translate(0, 46)
+      push()
+      rotate(PI/6)
+      fill(_clr[0], _clr[1], _clr[2])
+      ellipse(11, slight_Ym, 40, 62)
+      rotate(-PI/3)
+      ellipse(-11, slight_Ym, 40, 62)
+      pop()
+      fill(face_clr[0]+10,face_clr[1]-10,face_clr[2]-10)
+      ellipse(slight_Xm/2, 6+slight_Ym, 24+toEyeDist/50, 28-toEyeDist/50)
+      pop()
+    }
+    else if(mouth_type%10 == 9){
+      // 10th type of gill
+      // X mouth
+      push()
+      translate(this.x, this.y)
+      push()
+      translate(0, 40)
+      rotate(PI/4)
+      fill(hue.rgb())
+      rect(0, -20, 10, 50)
+      rotate(PI/2)
+      rect(0, -30, 10, 50)
+      pop()
       pop()
     }
   }
