@@ -611,7 +611,10 @@ class axolotl{
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
     var toEyeDist = dist(mouseX, mouseY, this.x, this.y)
+    
     if(mouth_type%7 == 0){
+      // 1st type of gill
+      // Reptile mouth
       push()
       translate(this.x, this.y)
       rect(-40, 40, 80, 40, 10)
@@ -626,6 +629,8 @@ class axolotl{
       pop()
     }
     else if(mouth_type%7 == 1){
+      // 2nd type of gill
+      // Opened mouth
       push()
       translate(this.x, this.y)
       ellipse(30, 50+slight_Ym, 86, 50+slight_Ym)
@@ -635,6 +640,8 @@ class axolotl{
       pop()
     }
     else if(mouth_type%7 == 2){
+      // 3rd type of gill
+      // Calm mouth
       push()
       translate(this.x, this.y)
       stroke(_clr[0], _clr[1], _clr[2])
@@ -646,6 +653,8 @@ class axolotl{
       pop()
     }
     else if(mouth_type%7 == 3){
+      // 4th type of gill
+      // Smile mouth
       noFill();
       stroke(_clr[0], _clr[1], _clr[2])
       strokeWeight(4)
@@ -656,6 +665,8 @@ class axolotl{
       arc(this.x, this.y+20, 130+slight_Xm, 110+slight_Ym, radians(25), radians(140), OPEN)
     }
     else if(mouth_type%7 == 4){
+      // 5th type of gill
+      // Bird mouth
       push()
       translate(this.x, this.y)
       quad(0, 20+slight_Ym, -50-slight_Xm, 40, 0, 60+slight_Ym, 50-slight_Xm, 40)
@@ -668,6 +679,8 @@ class axolotl{
       pop()
     }
     else if(mouth_type%7 == 5){
+      // 6th type of gill
+      // Rabbit mouth
       push()
       translate(this.x, this.y)
       fill(_clr[0]+15,_clr[1]+10,_clr[2]+10)
@@ -685,12 +698,17 @@ class axolotl{
       pop()
     }
     else if(mouth_type%7 == 6){
+      // 7th type of gill
+      // Bucktoothed mouth
       push()
       translate(this.x, this.y)
-      rect(-60+slight_Xm, 40+slight_Ym, 120, 20, 5)
-      stroke(_clr[0]-10, _clr[1]-10, _clr[2]-10)
-      strokeWeight(9-toEyeDist/100)
-      line(-48+slight_Xm, 50+slight_Ym/2, 48+slight_Xm, 50+slight_Ym/2)
+      rect(-72+slight_Xm, 30+slight_Ym, 144, 46-toEyeDist/20, 50, 50, 50, 50)
+      fill(_clr[0]+50, _clr[1], _clr[2])
+      rect(-60+slight_Xm, 35+slight_Ym, 120, 35-toEyeDist/20, 10, 10, 50, 50)
+      fill('white')
+      rect(-30+slight_Xm, 35+slight_Ym, 60, 20-toEyeDist/180, 0, 0, 6, 6)
+      fill('#D1D1D1')
+      rect(-2+slight_Xm, 35+slight_Ym, 4, 20-toEyeDist/180)
       pop()
     }
   }
