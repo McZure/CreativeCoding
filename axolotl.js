@@ -1057,20 +1057,20 @@ var deco = false
 
 function draw() {
   // Build the background using a halo effect and the face color
+  var hue = chroma.hsl(frameCount % 360, 0.2, 0.6)
   background(160)
   blendMode(MULTIPLY) // MULTIPLY - multiply the colors, result will always be darker
-  var bg_clr1 = color(face_clr[0], face_clr[1], face_clr[2])
+  var bg_clr1 = color(hue.rgb())
   noStroke()
   for(var i = 0; i < width*2; i+= 56){
     bg_clr1.setAlpha(26)
     fill(bg_clr1)
-    ellipse(width/2,height/2, i+mouseX)
-    // rect(0,0, i+mouseX, i+mouseX)
-    // push()
-    // translate(width/2, height/2)
-    // rotate(PI)
-    // rect(-width/2,-height/2, i+mouseX, i+mouseX)
-    // pop()
+    if(eyes_type% 2 == 0){
+      ellipse(width/2,height/2, i+mouseX)
+    }
+    else{
+      rect(0,0, i+mouseX, i+mouseX)
+    }
   }
   
   
