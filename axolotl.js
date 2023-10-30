@@ -631,7 +631,7 @@ class axolotl{
     }
     else if(mouth_type%10 == 1){
       // 2nd type of gill
-      // Opened mouth
+      // Thick lips
       push()
       translate(this.x, this.y)
       ellipse(30, 50+slight_Ym, 86, 50+slight_Ym)
@@ -642,7 +642,7 @@ class axolotl{
     }
     else if(mouth_type%10 == 2){
       // 3rd type of gill
-      // Calm mouth
+      // Expressionless mouth
       push()
       translate(this.x, this.y)
       stroke(_clr[0], _clr[1], _clr[2])
@@ -668,7 +668,7 @@ class axolotl{
     }
     else if(mouth_type%10 == 4){
       // 5th type of gill
-      // Bird mouth
+      // Bird beak
       push()
       translate(this.x, this.y)
       quad(0, 20+slight_Ym, -50-slight_Xm, 40, 0, 60+slight_Ym, 50-slight_Xm, 40)
