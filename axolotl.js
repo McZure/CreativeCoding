@@ -1065,7 +1065,7 @@ function draw() {
   for(var i = 0; i < width*2; i+= 56){
     bg_clr1.setAlpha(26)
     fill(bg_clr1)
-    if(eyes_type% 2 == 0){
+    if(eyes_type* gill_type% 2 == 0){
       ellipse(width/2,height/2, i+mouseX)
     }
     else{
