@@ -846,6 +846,190 @@ class axolotl{
     }
     pop()
   }
+
+  deco(deco_type, face_clr, _clr, weather, deco_on, eyes_type){
+    noStroke()
+    fill(_clr[0]+20, _clr[1]+20, _clr[2]+20)
+    var hue = chroma.hsl(frameCount % 360, 1, 0.8)
+    var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
+    var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
+    var toEyeDist = dist(mouseX, mouseY, this.x, this.y)
+
+    if (!weather && deco_on){
+      if(deco_type%5 == 0){
+        // Chick/Bird
+        push()
+        translate(this.x, this.y)
+        fill(face_clr[0]-20, face_clr[1]-20, face_clr[2]-20)
+        rect(-18+slight_Xm/2, -115, 4, 30)
+        rect(14+slight_Xm/2, -115, 4, 30)
+        rect(-22, -88, 10, 4, 20)
+        rect(11, -88, 10, 4, 20)
+          
+        fill(_clr[0]+10, _clr[1]+10, _clr[2])
+        ellipse(slight_Xm, -115-slight_Ym/2, 60, 50)
+        fill(face_clr[0]+20, face_clr[1]+20, face_clr[2])
+        ellipse(slight_Xm, -140-slight_Ym, 45, 50)
+        fill(_clr[0]+10, _clr[1]+10, _clr[2])
+        ellipse(slight_Xm, -145-slight_Ym, 50, 45)
+          
+        fill('black')
+        ellipse(-8+slight_Xm*1.5, -150-slight_Ym/2, 3, 8)
+        ellipse(8+slight_Xm*1.5, -150-slight_Ym/2, 3, 8)
+        fill('white')
+        ellipse(-8+slight_Xm*1.5, -154-slight_Ym/2, 3, 4)
+        ellipse(8+slight_Xm*1.5, -154-slight_Ym/2, 3, 4)
+          
+        fill('#6A748E')
+        triangle(slight_Xm, -145-slight_Ym/2, -4+slight_Xm, -140-slight_Ym/2, 4+slight_Xm, -140-slight_Ym/2)
+        pop()
+      }
+      else if(deco_type%5 == 1){
+        // Hat
+        push()
+        translate(this.x, this.y)
+        ellipse(0, -105, 100, 20)
+        fill(_clr[0], _clr[1], _clr[2])
+        ellipse(0, -110, 60, 10)
+        fill(_clr[0]+20, _clr[1]+20, _clr[2]+20)
+        rect(-20, -150, 40, 40, 5)
+        fill(_clr[0], _clr[1], _clr[2])
+        triangle(-17, -150, -25, -140, -19, -110)
+        triangle(17, -150, 25, -140, 19, -110)
+        pop()
+      }
+      else if(deco_type%5 == 2){
+        // Pointed hat
+        push()
+        translate(this.x, this.y)
+        triangle(0, -200, -30, -110, 30, -110)
+        for(var i=0; i <200; i++){
+          fill('white')
+          push()
+          translate(-30, -110)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()  
+          push()
+          translate(-20, -106)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          push()
+          translate(-10, -104)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          push()
+          translate(0, -103)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          push()
+          translate(10, -104)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          push()
+          translate(20, -106)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          push()
+          translate(30, -110)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          
+          push()
+          translate(0, -200)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+        }
+        pop()
+      }
+      else if(deco_type%5 == 3){
+        // Crown
+        push()
+        translate(this.x, this.y)
+        fill('#E8C55F')
+        rect(-5, -200, 10, 100, 2)
+        rect(-12, -190, 24, 8, 2)
+        fill(_clr[0]+20, _clr[1]+20, _clr[2]+20)
+        ellipse(-25, -140, 40,50)
+        ellipse(25, -140, 40,50)
+        fill(_clr[0]-10, _clr[1]-10, _clr[2]-10)
+        ellipse(0, -140, 50,60)
+        fill(_clr[0]+20, _clr[1]+20, _clr[2]+20)
+        ellipse(0, -140, 40,60)
+          
+        for(var i=0; i <200; i++){
+          fill('white')
+          push()
+          translate(-30, -110)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()  
+          push()
+          translate(-20, -106)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          push()
+          translate(-10, -104)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          push()
+          translate(0, -103)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          push()
+          translate(10, -104)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          push()
+          translate(20, -106)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+          push()
+          translate(30, -110)
+          rotate(i*PI/100)
+          ellipse(0, 0, 20 + random(0, 5), 1)
+          pop()
+        }
+        fill('#E8C55F')
+        ellipse(0, -130, 10, 15)
+        fill(hue.rgb())
+        ellipse(0, -130, 8, 11)
+        pop()
+      }
+      else if(deco_type%5 == 4){
+        // Awkward sign
+        push()
+        translate(this.x, this.y)
+        fill('white')
+        rect(50+ slight_Xm, -110, 3, 50, 2)
+        rect(60+ slight_Xm, -110, 3, 50, 2)
+        rect(70+ slight_Xm, -110, 3, 60, 2)
+        rect(80+ slight_Xm, -110, 3, 70, 2)
+        fill('lightblue')
+        ellipse(-80+ slight_Xm, -70, 40)
+        triangle(-80+ slight_Xm, -110, -100+ slight_Xm, -70, -60+ slight_Xm, -70)
+        fill('white')
+        ellipse(-75+ slight_Xm, -70, 20, 30)
+        fill('lightblue')
+        ellipse(-80+ slight_Xm, -70, 18, 30)
+        rect(-80+ slight_Xm, -65, 15, 3)
+        pop()
+      }
+    }
+    
+  }
 }
 
 function preload(){
@@ -868,6 +1052,8 @@ var eyes_clr = [50, 50, 50]
 var mouth_type = 100
 var mouth_clr = [150, 150, 150]
 var weather = false
+var deco_type = 100
+var deco = false
 
 function draw() {
   // Build the background using a halo effect and the face color
@@ -911,14 +1097,24 @@ function draw() {
     mouth_clr[0] = random(130, 220)
     mouth_clr[1] = random(130, 220)
     mouth_clr[2] = random(130, 220)
+    deco_type= int(random()*100)
   }
   noStroke()
   // Call functions to draw the axolotl
   a.gill(gill_type, gill_clr1, gill_clr2, face_clr)
   a.face(face_clr)
   a.mouth(mouth_type, mouth_clr, face_clr)
-  a.eyes(eyes_type, eyes_clr, face_clr)
+  if(eyes_type%10 == 4 || eyes_type%10 == 7 || deco_type%5 == 4){
+    a.eyes(eyes_type, eyes_clr, face_clr)
+    a.deco(deco_type, face_clr, mouth_clr, weather, deco, eyes_type)
+  }
+  else{
+    a.deco(deco_type, face_clr, mouth_clr, weather, deco, eyes_type)
+    a.eyes(eyes_type, eyes_clr, face_clr)
+  }
+  
   a.showWeather(weather, eyes_type)
+  
 }
 
 async function apiRequest(){
@@ -936,11 +1132,21 @@ async function apiRequest(){
 }
 
 function keyPressed() {
-  if (weather) {
-    weather = false
-  } 
-  else{
-    weather = true
+  if(keyCode === LEFT_ARROW){
+    if (weather) {
+      weather = false
+    } 
+    else{
+      weather = true
+    }
+  }
+  if(keyCode === RIGHT_ARROW){
+    if (deco) {
+      deco = false
+    } 
+    else{
+      deco = true
+    }
   }
 }
 function randBubble(x, y){
