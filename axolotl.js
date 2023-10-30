@@ -1148,6 +1148,11 @@ function keyPressed() {
       deco = true
     }
   }
+  if(keyCode === UP_ARROW){
+    if (deco) {
+      deco_type= int(random()*100)
+    } 
+  }
 }
 function randBubble(x, y){
   fill(random(255), random(255), random(255), 200)
