@@ -25,7 +25,7 @@ class axolotl{
     noStroke()
     fill(_clr1[0],_clr1[1],_clr1[2])
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
-    var toEyeDist = dist(mouseX, mouseY, this.x, this.y)
+    var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y), sqrt(width*width+height*height)/2)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
     if (gill_type%10 == 0){
@@ -1065,8 +1065,8 @@ var deco = false
 
 function draw() {
   // Build the background using a halo effect and the face color
-  var hue = chroma.hsl(frameCount % 360, 0.2, 0.6)
   background(160)
+  var hue = chroma.hsl(frameCount % 360, 0.2, 0.6)
   blendMode(MULTIPLY) // MULTIPLY - multiply the colors, result will always be darker
   var bg_clr1 = color(hue.rgb())
   noStroke()
@@ -1086,27 +1086,6 @@ function draw() {
   var a = new axolotl(width/2, height/2)
   // Click to switch to another axolotl
   // Change the values of key parameters using "random," and perform the switching through function calls within the axolotl class
-  if (mouseIsPressed == true){
-    face_clr[0] = random(110, 210)
-    face_clr[1] = random(110, 210)
-    face_clr[2] = random(110, 210)
-    gill_clr1[0] = random(110, 210)
-    gill_clr1[1] = random(110, 210)
-    gill_clr1[2] = random(110, 210)
-    gill_clr2[0] = random(110, 210)
-    gill_clr2[1] = random(110, 210)
-    gill_clr2[2] = random(110, 210)
-    gill_type= int(random()*100)
-    eyes_type= int(random()*100)
-    eyes_clr[0] = random(60, 200)
-    eyes_clr[1] = random(60, 200)
-    eyes_clr[2] = random(60, 200)
-    mouth_type= int(random()*100)
-    mouth_clr[0] = random(130, 220)
-    mouth_clr[1] = random(130, 220)
-    mouth_clr[2] = random(130, 220)
-    deco_type= int(random()*100)
-  }
   noStroke()
   // Call functions to draw the axolotl
   a.gill(gill_type, gill_clr1, gill_clr2, face_clr)
@@ -1160,6 +1139,27 @@ function keyPressed() {
     if (deco) {
       deco_type= int(random()*100)
     } 
+  }
+  if(keyCode === DOWN_ARROW){
+    face_clr[0] = random(110, 210)
+    face_clr[1] = random(110, 210)
+    face_clr[2] = random(110, 210)
+    gill_clr1[0] = random(110, 210)
+    gill_clr1[1] = random(110, 210)
+    gill_clr1[2] = random(110, 210)
+    gill_clr2[0] = random(110, 210)
+    gill_clr2[1] = random(110, 210)
+    gill_clr2[2] = random(110, 210)
+    gill_type= int(random()*100)
+    eyes_type= int(random()*100)
+    eyes_clr[0] = random(60, 200)
+    eyes_clr[1] = random(60, 200)
+    eyes_clr[2] = random(60, 200)
+    mouth_type= int(random()*100)
+    mouth_clr[0] = random(130, 220)
+    mouth_clr[1] = random(130, 220)
+    mouth_clr[2] = random(130, 220)
+    deco_type= int(random()*100)
   }
 }
 function randBubble(x, y){
