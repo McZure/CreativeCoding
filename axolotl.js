@@ -31,30 +31,36 @@ class axolotl{
     if (gill_type%10 == 0){
       // 1st type of gill
       // >(0_0)<
+      push()
+      translate(this.x,this.y)
       beginShape()
-      vertex(this.x-80, this.y)
-      vertex(this.x-120 + slight_Xm, this.y-40 + 1.6*slight_Ym)
-      vertex(this.x-140 + slight_Xm, this.y-20 + slight_Ym)
-      vertex(this.x-120, this.y + slight_Ym)
-      vertex(this.x-140 + slight_Xm, this.y+20 + slight_Ym)
-      vertex(this.x-120 + slight_Xm, this.y+40 + 1.6*slight_Ym)
+      vertex(-80, 0)
+      vertex(-120 + slight_Xm, -40 + 1.6*slight_Ym)
+      vertex(-140 + slight_Xm, -20 + slight_Ym)
+      vertex(-120, slight_Ym)
+      vertex(-140 + slight_Xm, 20 + slight_Ym)
+      vertex(-120 + slight_Xm, 40 + 1.6*slight_Ym)
       endShape()
       beginShape()
-      vertex(this.x+80, this.y)
-      vertex(this.x+120 + slight_Xm, this.y-40 + 1.6*slight_Ym)
-      vertex(this.x+140 + slight_Xm, this.y-20 + slight_Ym)
-      vertex(this.x+120, this.y + slight_Ym)
-      vertex(this.x+140 + slight_Xm, this.y+20 + slight_Ym)
-      vertex(this.x+120 + slight_Xm, this.y+40 + 1.6*slight_Ym)
+      vertex(80, 0)
+      vertex(120 + slight_Xm, -40 + 1.6*slight_Ym)
+      vertex(140 + slight_Xm, -20 + slight_Ym)
+      vertex(120, slight_Ym)
+      vertex(140 + slight_Xm, 20 + slight_Ym)
+      vertex(120 + slight_Xm, 40 + 1.6*slight_Ym)
       endShape()
+      pop()
     }
     else if(gill_type%10 == 1){
       // 2nd type of gill
       // ≡(0_0)≡
-      quad(this.x-168 + slight_Xm, this.y-30, this.x+168 - slight_Xm, this.y-30, this.x+152 - slight_Xm, this.y-10, this.x-152 + slight_Xm, this.y-10)
-      quad(this.x-150 - slight_Xm, this.y+28, this.x+150 + slight_Xm, this.y+28, this.x+166 + slight_Xm, this.y+10, this.x-166 - slight_Xm, this.y+10)
+      push()
+      translate(this.x,this.y)
+      quad(-168 + slight_Xm, -30, 168 - slight_Xm, -30, 152 - slight_Xm, -10, -152 + slight_Xm, -10)
+      quad(-150 - slight_Xm, 28, 150 + slight_Xm, 28, 166 + slight_Xm, 10, -166 - slight_Xm, 10)
       fill(_clr2[0],_clr2[1],_clr2[2])
-      quad(this.x-140 - slight_Xm, this.y-9, this.x+140 + slight_Xm, this.y-9, this.x+124 + slight_Xm, this.y+9, this.x-124 - slight_Xm, this.y+9)
+      quad(-140 - slight_Xm, -9, +140 + slight_Xm, -9, 124 + slight_Xm, 9, -124 - slight_Xm, 9)
+      pop()
     }
     else if(gill_type%10 == 2){
       // 3rd type of gill
@@ -94,18 +100,20 @@ class axolotl{
     else if(gill_type%10 == 3){
       // 4th type of gill
       // ◖(0_0)◗
-      ellipse(this.x+80, this.y+slight_Ym, 120+2*slight_Xm)
-      ellipse(this.x-80, this.y+slight_Ym, 120+2*slight_Xm)
+      push()
+      translate(this.x,this.y)
+      ellipse(80, slight_Ym, 120+2*slight_Xm)
+      ellipse(-80, slight_Ym, 120+2*slight_Xm)
       stroke(face_clr[0],face_clr[1],face_clr[2])
       strokeWeight(5)
       push()
-      translate(this.x, this.y)
       rotate(PI/20)
       line(115, slight_Ym, -116, slight_Ym)
       rotate(-2*PI/20)
       line(115, slight_Ym, -116, slight_Ym)
       pop()
-      line(119+this.x, this.y+slight_Ym, -119+this.x, this.y+slight_Ym)
+      line(119, slight_Ym, -119, slight_Ym)
+      pop()
     }
     else if(gill_type%10 == 4){
       // 5th type of gill
@@ -301,9 +309,9 @@ class axolotl{
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
-    var toEyeDist = dist(mouseX, mouseY, this.x, this.y)
+    var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y), sqrt(width*width+height*height)/2)
     // *Use this variable to calculate the highlight size in the eyes
-    var highlight = min(dist(mouseX, mouseY, width, 0), dist(mouseX, mouseY, 0, height), dist(mouseX, mouseY, 0, 0), dist(mouseX, mouseY, height, width))
+    var highlight = min(dist(mouseX, mouseY, width, 0), dist(mouseX, mouseY, 0, height), dist(mouseX, mouseY, 0, 0), dist(mouseX, mouseY, height, width), sqrt(width*width+height*height)/2)
     
     if(eyes_type%10 == 0){
       // 1st type of eyes
@@ -611,7 +619,7 @@ class axolotl{
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
-    var toEyeDist = dist(mouseX, mouseY, this.x, this.y)
+    var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y),sqrt(width*width+height*height)/2)
 
     if(mouth_type%10 == 0){
       // 1st type of gill
