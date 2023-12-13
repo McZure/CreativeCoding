@@ -1040,28 +1040,51 @@ class axolotl{
   }
 }
 
+// Color template
+let colors1 = "ed1c24-fdfffc-235789-f1d302-020100".split("-").map(a=>"#"+a)
+let colors2 = "2b2d42-8d99ae-edf2f4-ef233c-d80032".split("-").map(a=>"#"+a)
+let colors3 = "d6fff6-231651-4dccbd-2374ab-ff8484".split("-").map(a=>"#"+a)
+let colors4 = "a9e5bb-fcf6b1-f7b32b-f72c25-2d1e2f".split("-").map(a=>"#"+a)
+let colors5 = "ff8811-f4d06f-fff8f0-9dd9d2-392f5a".split("-").map(a=>"#"+a)
+let colors6 = "c5d86d-261c15-f7f7f2-e4e6c3-f05d23".split("-").map(a=>"#"+a)
+let colors7 = "ff6700-ebebeb-c0c0c0-3a6ea5-004e98".split("-").map(a=>"#"+a)
+let colors8 = "020202-0d2818-04471c-058c42-16db65".split("-").map(a=>"#"+a)
+let colors9 = "003049-d62828-f77f00-fcbf49-eae2b7".split("-").map(a=>"#"+a)
+let colors10 = "00072d-001c55-0a2472-0e6ba8-a6e1fa".split("-").map(a=>"#"+a)
+let colors11 ="6b2d5c-f0386b-ff5376-f8c0c8-e2c290".split("-").map(a=>"#"+a)
+let colors12 = "fb8b24-d90368-820263-291720-04a777".split("-").map(a=>"#"+a)
+let colors
+var gill_type = 100
+var eyes_type = 100
+var mouth_type = 100
+var deco_type = 100
+var face_clr
+var gill_clr1
+var gill_clr2
+var eyes_clr
+var mouth_clr
+var weather = false
+var deco = false
+
+
 function preload(){
   myFont1 = loadFont('powerPixel.ttf')
   myFont2 = loadFont('SanstainaRegular.ttf')
+  
 }
 
 function setup() {
   createCanvas(800, 600)
   frameRate(60)
   apiRequest()
+  colors = random([colors1,colors2,colors3,colors4,colors5,colors6,colors7,colors8,colors9,colors10,colors11,colors12]) 
+  colors = shuffle(colors)
+  face_clr = hexToRGB(colors[0])
+  gill_clr1 = hexToRGB(colors[1])
+  gill_clr2 = hexToRGB(colors[2])
+  eyes_clr = hexToRGB(colors[3])
+  mouth_clr = hexToRGB(colors[4])
 }
-
-var face_clr = [100, 100, 100]
-var gill_type = 100
-var gill_clr1 = [150, 150, 150]
-var gill_clr2 = [150, 200, 200]
-var eyes_type = 100
-var eyes_clr = [50, 50, 50]
-var mouth_type = 100
-var mouth_clr = [150, 150, 150]
-var weather = false
-var deco_type = 100
-var deco = false
 
 function draw() {
   // Build the background using a halo effect and the face color
@@ -1141,24 +1164,32 @@ function keyPressed() {
     } 
   }
   if(keyCode === DOWN_ARROW){
-    face_clr[0] = random(110, 210)
-    face_clr[1] = random(110, 210)
-    face_clr[2] = random(110, 210)
-    gill_clr1[0] = random(110, 210)
-    gill_clr1[1] = random(110, 210)
-    gill_clr1[2] = random(110, 210)
-    gill_clr2[0] = random(110, 210)
-    gill_clr2[1] = random(110, 210)
-    gill_clr2[2] = random(110, 210)
-    gill_type= int(random()*100)
+    colors = random([colors1,colors2,colors3,colors4,colors5,colors6,colors7,colors8,colors9,colors10,colors11,colors12])
+    colors = shuffle(colors)
+    face_clr = hexToRGB(colors[0])
+    gill_clr1 = hexToRGB(colors[1])
+    gill_clr2 = hexToRGB(colors[2])
+    eyes_clr = hexToRGB(colors[3])
+    mouth_clr = hexToRGB(colors[4])
+    // face_clr[0] = random(110, 210)
+    // face_clr[1] = random(110, 210)
+    // face_clr[2] = random(110, 210)
+    // gill_clr1[0] = random(110, 210)
+    // gill_clr1[1] = random(110, 210)
+    // gill_clr1[2] = random(110, 210)
+    // gill_clr2[0] = random(110, 210)
+    // gill_clr2[1] = random(110, 210)
+    // gill_clr2[2] = random(110, 210)
+    // eyes_clr[0] = random(60, 200)
+    // eyes_clr[1] = random(60, 200)
+    // eyes_clr[2] = random(60, 200)
+    // mouth_clr[0] = random(130, 220)
+    // mouth_clr[1] = random(130, 220)
+    // mouth_clr[2] = random(130, 220)
+    // Types
     eyes_type= int(random()*100)
-    eyes_clr[0] = random(60, 200)
-    eyes_clr[1] = random(60, 200)
-    eyes_clr[2] = random(60, 200)
+    gill_type= int(random()*100)
     mouth_type= int(random()*100)
-    mouth_clr[0] = random(130, 220)
-    mouth_clr[1] = random(130, 220)
-    mouth_clr[2] = random(130, 220)
     deco_type= int(random()*100)
   }
 }
@@ -1168,4 +1199,13 @@ function randBubble(x, y){
     var sign = pow(-1, int(random(0, 100)))
     ellipse(x+ sign*random(0, 20),y + sign*random(0, 20), random(0, 8))
   }
+}
+
+function hexToRGB(hex) {
+  let r = parseInt(hex.slice(1, 3), 16);
+  let g = parseInt(hex.slice(3, 5), 16);
+  let b = parseInt(hex.slice(5, 7), 16);
+
+  console.log([r, g, b])
+  return [r, g, b];
 }
