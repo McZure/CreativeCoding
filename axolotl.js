@@ -313,9 +313,9 @@ class axolotl{
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
-    var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y), sqrt(width*width+height*height)/2)
+    var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y), sqrt(1000*1000+800*800)/2)
     // *Use this variable to calculate the highlight size in the eyes
-    var highlight = min(dist(mouseX, mouseY, width, 0), dist(mouseX, mouseY, 0, height), dist(mouseX, mouseY, 0, 0), dist(mouseX, mouseY, height, width), sqrt(width*width+height*height)/2)
+    var highlight = min(dist(mouseX, mouseY, width, 0), dist(mouseX, mouseY, 0, height), dist(mouseX, mouseY, 0, 0), dist(mouseX, mouseY, height, width), sqrt(800*800+600*600)/2)
     
     if(this.eyes_type%10 == 0){
       // 1st type of eyes
@@ -623,7 +623,7 @@ class axolotl{
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
-    var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y),sqrt(width*width+height*height)/2)
+    var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y),sqrt(1000*1000+800*800)/2)
 
     if(this.mouth_type%10 == 0){
       // 1st type of gill
@@ -1085,7 +1085,7 @@ function preload(){
 }
 // ******************************* Setup Function *******************************//
 function setup() {
-  createCanvas(1000, 800)
+  createCanvas(1600, 1200)
   frameRate(60)
   apiRequest()
   canvas.addEventListener('contextmenu', event => event.preventDefault());
@@ -1224,8 +1224,12 @@ function hexToRGB(hex) {
   return [r, g, b];
 }
 
+function backgrounds(){
+
+}
+// Axolotl Functions
 function createAxot(x, y, i_type, g_type, m_type){
-  var a = new axolotl(1.25*x, 1.25*y, i_type, g_type, m_type)
+  var a = new axolotl(x, y, i_type, g_type, m_type)
   axolotls.push(a)
   colorAxot(face_clr, gill_clr1, gill_clr2, eyes_clr, mouth_clr, deco_type)
 }
@@ -1245,7 +1249,6 @@ function drawAxot(a, a_clr){
   noStroke()
   // Call functions to draw the axolotl
   push()
-  scale(0.8)
   a.gill(a_clr[1], a_clr[2], a_clr[0])
   a.face(a_clr[0])
   a.mouth(a_clr[4], a_clr[0])
