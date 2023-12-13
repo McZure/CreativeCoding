@@ -1225,7 +1225,7 @@ function hexToRGB(hex) {
 }
 
 function createAxot(x, y, i_type, g_type, m_type){
-  var a = new axolotl(x, y, i_type, g_type, m_type)
+  var a = new axolotl(1.25*x, 1.25*y, i_type, g_type, m_type)
   axolotls.push(a)
   colorAxot(face_clr, gill_clr1, gill_clr2, eyes_clr, mouth_clr, deco_type)
 }
