@@ -1,3 +1,4 @@
+// Imported Variables
 let rain
 let temp
 let snowfall
@@ -7,9 +8,12 @@ let cloud
 let temp_unit
 
 class axolotl{
-  constructor(x, y){
+  constructor(x, y, eyes_type, gill_type, mouth_type){
     this.x = x
     this.y = y
+    this.eyes_type = eyes_type
+    this.gill_type = gill_type
+    this.mouth_type = mouth_type
   }
 
   // function used to construct the face, primarily by changing colors to create differences.
@@ -21,14 +25,14 @@ class axolotl{
   }
   
   // function used to construct the gill section, primarily by changing shapes and colors to create differences
-  gill(gill_type, _clr1, _clr2, face_clr){
+  gill(_clr1, _clr2, face_clr){
     noStroke()
     fill(_clr1[0],_clr1[1],_clr1[2])
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y), sqrt(width*width+height*height)/2)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
-    if (gill_type%10 == 0){
+    if (this.gill_type%10 == 0){
       // 1st type of gill
       // >(0_0)<
       push()
@@ -51,7 +55,7 @@ class axolotl{
       endShape()
       pop()
     }
-    else if(gill_type%10 == 1){
+    else if(this.gill_type%10 == 1){
       // 2nd type of gill
       // ≡(0_0)≡
       push()
@@ -62,7 +66,7 @@ class axolotl{
       quad(-140 - slight_Xm, -9, +140 + slight_Xm, -9, 124 + slight_Xm, 9, -124 - slight_Xm, 9)
       pop()
     }
-    else if(gill_type%10 == 2){
+    else if(this.gill_type%10 == 2){
       // 3rd type of gill
       // ⋙(0_0)⋘
       push()
@@ -97,7 +101,7 @@ class axolotl{
       quad(160, 0, 190, -18, 220, 0, 190, 18)
       pop()
     }
-    else if(gill_type%10 == 3){
+    else if(this.gill_type%10 == 3){
       // 4th type of gill
       // ◖(0_0)◗
       push()
@@ -115,7 +119,7 @@ class axolotl{
       line(119, slight_Ym, -119, slight_Ym)
       pop()
     }
-    else if(gill_type%10 == 4){
+    else if(this.gill_type%10 == 4){
       // 5th type of gill
       // ◥(0_0)◤
       push()
@@ -137,7 +141,7 @@ class axolotl{
       triangle(160 + slight_Xm, 50 + slight_Ym, 10, 50, 10, 0)
       pop()
     }
-    else if(gill_type%10 == 5){
+    else if(this.gill_type%10 == 5){
       // 6th type of gill
       // ►(0_0)◄
       push()
@@ -159,7 +163,7 @@ class axolotl{
       triangle(0, 0, 190 + slight_Xm, 30+ slight_Ym, 170+ slight_Xm, 70)
       pop()
     }
-    else if(gill_type%10 == 6){
+    else if(this.gill_type%10 == 6){
       // 7th type of gill
       // ʚ(0_0)ɞ
       push()
@@ -182,7 +186,7 @@ class axolotl{
       ellipse(50, -90, 60+slight_Ym, 90+slight_Xm)
       pop()
     }
-    else if(gill_type%10 == 7){
+    else if(this.gill_type%10 == 7){
       // 8th type of gill
       // ⋱(0_0)⋰
       fill(hue.rgb())
@@ -210,7 +214,7 @@ class axolotl{
       rect(-110-(10+frameCount)%15, -70+ slight_Ym, 15)
       pop()
     }
-    else if(gill_type%10 == 8){
+    else if(this.gill_type%10 == 8){
       // 9th type of gill
       // ∻(0_0)∻
       push()
@@ -246,7 +250,7 @@ class axolotl{
       }
       pop()
     }
-    else if(gill_type%10 == 9){
+    else if(this.gill_type%10 == 9){
       // 10th type of gill
       // ⦩(0_0)⦨
       push()
@@ -304,7 +308,7 @@ class axolotl{
     }
   }
   
-  eyes(eyes_type, _clr, face_clr){
+  eyes(_clr, face_clr){
     noStroke()
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
@@ -313,7 +317,7 @@ class axolotl{
     // *Use this variable to calculate the highlight size in the eyes
     var highlight = min(dist(mouseX, mouseY, width, 0), dist(mouseX, mouseY, 0, height), dist(mouseX, mouseY, 0, 0), dist(mouseX, mouseY, height, width), sqrt(width*width+height*height)/2)
     
-    if(eyes_type%10 == 0){
+    if(this.eyes_type%10 == 0){
       // 1st type of eyes
       // Peaceful eyes
       // (⊝⊝)
@@ -327,7 +331,7 @@ class axolotl{
       rect(10+slight_Xm, -26+slight_Ym, 35, 23 - toEyeDist/50)
       pop()
     }
-    else if(eyes_type%10 == 1){
+    else if(this.eyes_type%10 == 1){
       // 2nd type of eyes
       // Cat eyes
       // (◉◉)
@@ -344,7 +348,7 @@ class axolotl{
       ellipse(30+slight_Xm, -25+slight_Ym, highlight/30)
       pop()
     }
-    else if(eyes_type%10 == 2){
+    else if(this.eyes_type%10 == 2){
       // 3rd type of eyes
       // Big eyes
       // (⋒ ⋒)
@@ -364,7 +368,7 @@ class axolotl{
       ellipse(35+slight_Xm, -35+slight_Ym, 10)
       pop()
     }
-    else if(eyes_type%10 == 3){
+    else if(this.eyes_type%10 == 3){
       // 4th type of eyes
       // Cynical eyes
       // (￢ ￢)
@@ -384,7 +388,7 @@ class axolotl{
       rect(-82, -72, 165, 30, 10, 10, 0, 0)
       pop()
     }
-    else if(eyes_type%10 == 4){
+    else if(this.eyes_type%10 == 4){
       // 5th type of eyes
       // Cyclops
       // ( ◕ )
@@ -400,7 +404,7 @@ class axolotl{
       ellipse(-20, -70, 60)
       pop()
     }
-    else if(eyes_type%10 == 5){
+    else if(this.eyes_type%10 == 5){
       // 6th type of eyes
       // Eyes behind glasses
       // (〄〄)
@@ -426,7 +430,7 @@ class axolotl{
       rect(20-slight_Xm, -20-toEyeDist/10, 5, 5)
       pop()
     }
-    else if(eyes_type%10 == 6){
+    else if(this.eyes_type%10 == 6){
       // 7th type of eyes
       // Electronic eyes
       // (▦▦)
@@ -487,7 +491,7 @@ class axolotl{
         rect(30+slight_Xm, -50+slight_Ym, 20, 10)
         rect(50+slight_Xm, -45+slight_Ym, 10, 10)
         // Eyes
-        fill("white")
+        fill(_clr)
         rect(-40+slight_Xm, -25+slight_Ym, 10, 30-toEyeDist/50)
         rect(30+slight_Xm, -25+slight_Ym, 10, 30-toEyeDist/50)
       }
@@ -499,7 +503,7 @@ class axolotl{
       ellipse(76, -20, 38, 80)
       pop()
     }
-    else if(eyes_type%10 == 7){
+    else if(this.eyes_type%10 == 7){
       // 8th type of eyes
       // Three eyes
       // ( ∴ )
@@ -552,7 +556,7 @@ class axolotl{
       ellipse(0+slight_Xm, -70+slight_Ym, 60+slight_Xm, 40)
       pop()
     }
-    else if(eyes_type%10 == 8){
+    else if(this.eyes_type%10 == 8){
       // 9th type of eyes
       // Evil eyes
       // (◣◢)
@@ -588,7 +592,7 @@ class axolotl{
       pop()
       pop()
     }
-    else if(eyes_type%10 == 9){
+    else if(this.eyes_type%10 == 9){
       // 10th type of eyes
       // Yinyang eyes
       // (☯)
@@ -613,7 +617,7 @@ class axolotl{
     }
   }
   
-   mouth(mouth_type, _clr, face_clr){
+   mouth(_clr, face_clr){
     noStroke()
     fill(_clr[0], _clr[1], _clr[2])
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
@@ -621,7 +625,7 @@ class axolotl{
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
     var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y),sqrt(width*width+height*height)/2)
 
-    if(mouth_type%10 == 0){
+    if(this.mouth_type%10 == 0){
       // 1st type of gill
       // Reptile mouth
       push()
@@ -637,7 +641,7 @@ class axolotl{
       line(9, 40+slight_Ym, 7-toEyeDist/300 , 42+slight_Ym)
       pop()
     }
-    else if(mouth_type%10 == 1){
+    else if(this.mouth_type%10 == 1){
       // 2nd type of gill
       // Thick lips
       push()
@@ -648,7 +652,7 @@ class axolotl{
       rect(-80, 55+slight_Ym, 160, 30)
       pop()
     }
-    else if(mouth_type%10 == 2){
+    else if(this.mouth_type%10 == 2){
       // 3rd type of gill
       // Expressionless mouth
       push()
@@ -662,7 +666,7 @@ class axolotl{
       line(-55-toEyeDist/50, 65+slight_Ym/2, 55+toEyeDist/50, 65-slight_Ym/2)
       pop()
     }
-    else if(mouth_type%10 == 3){
+    else if(this.mouth_type%10 == 3){
       // 4th type of gill
       // Smile mouth
       noFill();
@@ -674,7 +678,7 @@ class axolotl{
       strokeWeight(8)
       arc(this.x, this.y+20, 130+slight_Xm, 110+slight_Ym, radians(25), radians(140), OPEN)
     }
-    else if(mouth_type%10 == 4){
+    else if(this.mouth_type%10 == 4){
       // 5th type of gill
       // Bird beak
       push()
@@ -688,7 +692,7 @@ class axolotl{
       line(10, 24+slight_Ym, 10-toEyeDist/300 , 27+slight_Ym)
       pop()
     }
-    else if(mouth_type%10 == 5){
+    else if(this.mouth_type%10 == 5){
       // 6th type of gill
       // Rabbit mouth
       push()
@@ -707,7 +711,7 @@ class axolotl{
       line(10, 30+slight_Ym, 6-toEyeDist/300 , 33+slight_Ym)
       pop()
     }
-    else if(mouth_type%10 == 6){
+    else if(this.mouth_type%10 == 6){
       // 7th type of gill
       // Bucktoothed mouth
       push()
@@ -721,7 +725,7 @@ class axolotl{
       rect(-2+slight_Xm, 35+slight_Ym, 4, 20-toEyeDist/180)
       pop()
     }
-    else if(mouth_type%10 == 7){
+    else if(this.mouth_type%10 == 7){
       // 8th type of gill
       // Grinning mouth
       push()
@@ -741,7 +745,7 @@ class axolotl{
       line(9, 26+slight_Ym, 7-toEyeDist/300 , 28+slight_Ym)
       pop()
     }
-    else if(mouth_type%10 == 8){
+    else if(this.mouth_type%10 == 8){
       // 9th type of gill
       // Heart mouth
       push()
@@ -758,7 +762,7 @@ class axolotl{
       ellipse(slight_Xm/2, 6+slight_Ym, 24+toEyeDist/50, 28-toEyeDist/50)
       pop()
     }
-    else if(mouth_type%10 == 9){
+    else if(this.mouth_type%10 == 9){
       // 10th type of gill
       // X mouth
       push()
@@ -775,7 +779,7 @@ class axolotl{
     }
   }
   
-  showWeather(weather, eyes_type){
+  showWeather(weather){
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
     push()
@@ -815,7 +819,7 @@ class axolotl{
         ellipse(10, -150, 50)
       }
       // Show temperature
-      if(dist(mouseX, mouseY, this.x, this.y-150) < 60 && eyes_type%10 == 6){
+      if(dist(mouseX, mouseY, this.x, this.y-150) < 60 && this.eyes_type%10 == 6){
         fill("white")
         textFont(myFont1, 40)
         if(temp >= 100 || temp <= -10){
@@ -855,13 +859,12 @@ class axolotl{
     pop()
   }
 
-  deco(deco_type, face_clr, _clr, weather, deco_on, eyes_type){
+  deco(deco_type, face_clr, _clr, weather, deco_on){
     noStroke()
     fill(_clr[0]+20, _clr[1]+20, _clr[2]+20)
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
-    var toEyeDist = dist(mouseX, mouseY, this.x, this.y)
 
     if (!weather && deco_on){
       if(deco_type%5 == 0){
@@ -1038,9 +1041,14 @@ class axolotl{
     }
     
   }
+
+  update(new_x, new_y){
+    this.x = new_x
+    this.y = new_y
+  }
 }
 
-// Color template
+// Color Template
 let colors1 = "ed1c24-fdfffc-235789-f1d302-020100".split("-").map(a=>"#"+a)
 let colors2 = "2b2d42-8d99ae-edf2f4-ef233c-d80032".split("-").map(a=>"#"+a)
 let colors3 = "d6fff6-231651-4dccbd-2374ab-ff8484".split("-").map(a=>"#"+a)
@@ -1053,11 +1061,12 @@ let colors9 = "003049-d62828-f77f00-fcbf49-eae2b7".split("-").map(a=>"#"+a)
 let colors10 = "00072d-001c55-0a2472-0e6ba8-a6e1fa".split("-").map(a=>"#"+a)
 let colors11 ="6b2d5c-f0386b-ff5376-f8c0c8-e2c290".split("-").map(a=>"#"+a)
 let colors12 = "fb8b24-d90368-820263-291720-04a777".split("-").map(a=>"#"+a)
+// Global Variables
 let colors
-var gill_type = 100
-var eyes_type = 100
-var mouth_type = 100
-var deco_type = 100
+var gill_type
+var eyes_type
+var mouth_type
+var deco_type
 var face_clr
 var gill_clr1
 var gill_clr2
@@ -1065,18 +1074,23 @@ var eyes_clr
 var mouth_clr
 var weather = false
 var deco = false
+let axolotls = []
+let axolotls_clr = []
 
-
+// Preload Function
 function preload(){
   myFont1 = loadFont('powerPixel.ttf')
   myFont2 = loadFont('SanstainaRegular.ttf')
   
 }
-
+// ******************************* Setup Function *******************************//
 function setup() {
-  createCanvas(800, 600)
+  createCanvas(1000, 800)
   frameRate(60)
   apiRequest()
+  canvas.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Global Variables
   colors = random([colors1,colors2,colors3,colors4,colors5,colors6,colors7,colors8,colors9,colors10,colors11,colors12]) 
   colors = shuffle(colors)
   face_clr = hexToRGB(colors[0])
@@ -1084,8 +1098,12 @@ function setup() {
   gill_clr2 = hexToRGB(colors[2])
   eyes_clr = hexToRGB(colors[3])
   mouth_clr = hexToRGB(colors[4])
+  eyes_type= int(random()*100)
+  gill_type= int(random()*100)
+  mouth_type= int(random()*100)
+  deco_type= int(random()*100)
 }
-
+// ******************************* Draw Function *******************************//
 function draw() {
   // Build the background using a halo effect and the face color
   background(160)
@@ -1104,28 +1122,14 @@ function draw() {
     }
   }
   
-  
   blendMode(BLEND) // BLEND - linear interpolation of colours: C = A*factor + B. This is the default blending mode
-  var a = new axolotl(width/2, height/2)
-  // Click to switch to another axolotl
-  // Change the values of key parameters using "random," and perform the switching through function calls within the axolotl class
-  noStroke()
-  // Call functions to draw the axolotl
-  a.gill(gill_type, gill_clr1, gill_clr2, face_clr)
-  a.face(face_clr)
-  a.mouth(mouth_type, mouth_clr, face_clr)
-  if(eyes_type%10 == 4 || eyes_type%10 == 7 || deco_type%5 == 4){
-    a.eyes(eyes_type, eyes_clr, face_clr)
-    a.deco(deco_type, face_clr, mouth_clr, weather, deco, eyes_type)
+
+  for(let am=0; am < axolotls.length; am++){
+    let a_color = axolotls_clr[am]
+    drawAxot(axolotls[am], a_color)
   }
-  else{
-    a.deco(deco_type, face_clr, mouth_clr, weather, deco, eyes_type)
-    a.eyes(eyes_type, eyes_clr, face_clr)
-  }
-  
-  a.showWeather(weather, eyes_type)
-  
 }
+// ******************************* ********** *******************************//
 
 async function apiRequest(){
   let request = await fetch("https://api.open-meteo.com/v1/forecast?latitude=40.6501&longitude=-73.9496&current=temperature_2m,is_day,rain,snowfall,cloudcover,windspeed_10m&hourly=temperature_2m,rain")
@@ -1141,6 +1145,24 @@ async function apiRequest(){
   temp_unit = data.current_units.temperature_2m
 }
 
+// Interaction Functions
+function mouseClicked(){
+  if (mouseButton === LEFT){
+    createAxot(mouseX, mouseY, eyes_type, gill_type, mouth_type)
+  }
+  deco_type= int(random()*100)
+}
+
+function mousePressed(){
+  if (mouseButton === RIGHT) {
+    eyes_type= int(random()*100)
+    gill_type= int(random()*100)
+    mouth_type= int(random()*100)
+    deco_type= int(random()*100)
+    createAxot(mouseX, mouseY, eyes_type, gill_type, mouth_type)
+  }
+  deco_type= int(random()*100)
+}
 function keyPressed() {
   if(keyCode === LEFT_ARROW){
     if (weather) {
@@ -1164,13 +1186,6 @@ function keyPressed() {
     } 
   }
   if(keyCode === DOWN_ARROW){
-    colors = random([colors1,colors2,colors3,colors4,colors5,colors6,colors7,colors8,colors9,colors10,colors11,colors12])
-    colors = shuffle(colors)
-    face_clr = hexToRGB(colors[0])
-    gill_clr1 = hexToRGB(colors[1])
-    gill_clr2 = hexToRGB(colors[2])
-    eyes_clr = hexToRGB(colors[3])
-    mouth_clr = hexToRGB(colors[4])
     // face_clr[0] = random(110, 210)
     // face_clr[1] = random(110, 210)
     // face_clr[2] = random(110, 210)
@@ -1187,12 +1202,11 @@ function keyPressed() {
     // mouth_clr[1] = random(130, 220)
     // mouth_clr[2] = random(130, 220)
     // Types
-    eyes_type= int(random()*100)
-    gill_type= int(random()*100)
-    mouth_type= int(random()*100)
-    deco_type= int(random()*100)
   }
 }
+
+
+// Helper Functions
 function randBubble(x, y){
   fill(random(255), random(255), random(255), 200)
   for(var j= 0; j< int(random(0, 5)); j++){
@@ -1208,4 +1222,42 @@ function hexToRGB(hex) {
 
   console.log([r, g, b])
   return [r, g, b];
+}
+
+function createAxot(x, y, i_type, g_type, m_type){
+  var a = new axolotl(x, y, i_type, g_type, m_type)
+  axolotls.push(a)
+  colorAxot(face_clr, gill_clr1, gill_clr2, eyes_clr, mouth_clr, deco_type)
+}
+
+function colorAxot(f_clr, g_clr1, g_clr2, e_clr, m_clr, d_type){
+  axolotls_clr.push([f_clr, g_clr1, g_clr2, e_clr, m_clr, d_type])
+  colors = random([colors1,colors2,colors3,colors4,colors5,colors6,colors7,colors8,colors9,colors10,colors11,colors12])
+  colors = shuffle(colors)
+  face_clr = hexToRGB(colors[0])
+  gill_clr1 = hexToRGB(colors[1])
+  gill_clr2 = hexToRGB(colors[2])
+  eyes_clr = hexToRGB(colors[3])
+  mouth_clr = hexToRGB(colors[4])
+}
+
+function drawAxot(a, a_clr){
+  noStroke()
+  // Call functions to draw the axolotl
+  push()
+  scale(0.8)
+  a.gill(a_clr[1], a_clr[2], a_clr[0])
+  a.face(a_clr[0])
+  a.mouth(a_clr[4], a_clr[0])
+  if(a.eyes_type%10 == 4 || a.eyes_type%10 == 7 || a_clr[5]%5 == 4){
+    a.eyes(a_clr[3], a_clr[0])
+    a.deco(a_clr[5], a_clr[0], a_clr[4], weather, deco)
+  }
+  else{
+    a.deco(a_clr[5], a_clr[0], a_clr[4], weather, deco)
+    a.eyes(a_clr[3], a_clr[0])
+  }
+  
+  a.showWeather(weather)
+  pop()
 }
