@@ -14,6 +14,7 @@ class axolotl{
     this.eyes_type = eyes_type
     this.gill_type = gill_type
     this.mouth_type = mouth_type
+    this.r = int(random(0, 200))
   }
 
   // function used to construct the face, primarily by changing colors to create differences.
@@ -308,7 +309,7 @@ class axolotl{
     }
   }
   
-  eyes(_clr, face_clr){
+  eyes(_clr, face_clr, deco_type){
     noStroke()
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
@@ -327,8 +328,16 @@ class axolotl{
       circle(-30, -20, 60)
       circle(30, -20, 60)
       fill(_clr[0], _clr[1], _clr[2])
-      rect(-46+slight_Xm, -26+slight_Ym, 35, 23 - toEyeDist/50)
-      rect(10+slight_Xm, -26+slight_Ym, 35, 23 - toEyeDist/50)
+      if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 6){
+        // Blink
+        rect(-46+slight_Xm, -15+slight_Ym, 35, (frameCount+this.r)% 200 - toEyeDist/50)
+        rect(10+slight_Xm, -15+slight_Ym, 35, (frameCount+this.r)% 200 - toEyeDist/50)
+      }
+      else{
+        rect(-46+slight_Xm, -26+slight_Ym, 35, 23 - toEyeDist/50)
+        rect(10+slight_Xm, -26+slight_Ym, 35, 23 - toEyeDist/50)
+      }
+
       pop()
     }
     else if(this.eyes_type%10 == 1){
@@ -346,6 +355,14 @@ class axolotl{
       fill("white")
       ellipse(-30+slight_Xm, -25+slight_Ym, highlight/30)
       ellipse(30+slight_Xm, -25+slight_Ym, highlight/30)
+
+      // Blink
+      if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 8){
+        fill(face_clr[0],face_clr[1],face_clr[2])
+        rect(-60, -50, 60, 64-(frameCount+this.r)% 200)
+        rect(0, -50, 60, 64-(frameCount+this.r)% 200)
+      }
+
       pop()
     }
     else if(this.eyes_type%10 == 2){
@@ -355,8 +372,8 @@ class axolotl{
       push()
       translate(this.x, this.y)
       fill(_clr[0]/2, _clr[1]/2, _clr[2]/2)
-      rect(-76+slight_Xm, -76+slight_Ym, 66, 95-toEyeDist/50, 100, 15, 10, 10)
-      rect(9+slight_Xm, -76+slight_Ym, 66, 95-toEyeDist/50, 15, 100, 10, 10)
+      rect(-74+slight_Xm, -76+slight_Ym, 66, 95-toEyeDist/50, 100, 15, 10, 10)
+      rect(8+slight_Xm, -76+slight_Ym, 66, 95-toEyeDist/50, 15, 100, 10, 10)
       fill("white")
       rect(-65+slight_Xm, -70+slight_Ym, 56, 90-toEyeDist/50, 100, 15, 10, 10)
       rect(9+slight_Xm, -70+slight_Ym, 56, 90-toEyeDist/50, 15, 100, 10, 10)
@@ -366,6 +383,14 @@ class axolotl{
       fill("white")
       ellipse(-35+slight_Xm, -35+slight_Ym, 10)
       ellipse(35+slight_Xm, -35+slight_Ym, 10)
+
+      // Blink
+      if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 8){
+        fill(_clr[0]/2, _clr[1]/2, _clr[2]/2)
+        rect(-74+slight_Xm, -76+slight_Ym, 66, 97-toEyeDist/50-(frameCount+this.r)% 200, 100, 15, 10, 10)
+        rect(8+slight_Xm, -76+slight_Ym, 66, 97-toEyeDist/50-(frameCount+this.r)% 200, 15, 100, 10, 10)
+      }
+
       pop()
     }
     else if(this.eyes_type%10 == 3){
@@ -386,6 +411,13 @@ class axolotl{
       noStroke()
       fill(face_clr[0],face_clr[1],face_clr[2])
       rect(-82, -72, 165, 30, 10, 10, 0, 0)
+      
+      //Blink
+      if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 6){
+        ellipse(-35, -40, 85, 60-(frameCount+this.r)% 200)
+        ellipse(35, -40, 85, 60-(frameCount+this.r)% 200)
+      }
+
       pop()
     }
     else if(this.eyes_type%10 == 4){
@@ -402,6 +434,12 @@ class axolotl{
       ellipse(10+slight_Xm, -30+slight_Ym, 30-toEyeDist/30)
       fill(face_clr[0],face_clr[1],face_clr[2])
       ellipse(-20, -70, 60)
+
+      // Blink
+      if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 6){
+        ellipse(0, -38, 105, 110-(frameCount+this.r)% 200 *1.5)
+      }
+
       pop()
     }
     else if(this.eyes_type%10 == 5){
@@ -414,8 +452,15 @@ class axolotl{
       ellipse(-35, -40, 85, 60)
       ellipse(35, -40, 85, 60)
       fill(_clr[0]+toEyeDist/10, _clr[1]+toEyeDist/10, _clr[2]+toEyeDist/10)
-      rect(-50+slight_Xm*2, -65+slight_Ym, 18, 40, 5)
-      rect(20+slight_Xm*2, -65+slight_Ym, 18, 40, 5)
+      if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 6){
+        // Blink
+        rect(-50+slight_Xm*2, -45+slight_Ym, 18, (frameCount+this.r)% 200, 5)
+        rect(20+slight_Xm*2, -45+slight_Ym, 18, (frameCount+this.r)% 200, 5)
+      }
+      else{
+        rect(-50+slight_Xm*2, -65+slight_Ym, 18, 40, 5)
+        rect(20+slight_Xm*2, -65+slight_Ym, 18, 40, 5)
+      }
       // Glasses
       fill(_clr[0], _clr[1], _clr[2])
       ellipse(-40-slight_Xm, -30-toEyeDist/10, 80)
@@ -446,7 +491,7 @@ class axolotl{
       
       // Weather
       if(toEyeDist < 30){
-        if(weather){
+        if(deco_type%6 == 5 && deco){
           // The eyes will show current weather
           if(rain){
             hue = chroma.hsl(180+frameCount % 60, 1, 0.7)
@@ -481,7 +526,7 @@ class axolotl{
           text("CC", -45, 5)
         }
       }
-      else if(dist(mouseX, mouseY, this.x, this.y-150) < 60 && weather){
+      else if(dist(mouseX, mouseY, this.x, this.y-150) < 60 && deco_type%6 == 5){
         // Important!!! Avoid conflicts
       }
       else{
@@ -492,8 +537,15 @@ class axolotl{
         rect(50+slight_Xm, -45+slight_Ym, 10, 10)
         // Eyes
         fill(_clr)
-        rect(-40+slight_Xm, -25+slight_Ym, 10, 30-toEyeDist/50)
-        rect(30+slight_Xm, -25+slight_Ym, 10, 30-toEyeDist/50)
+        if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 8){
+          // Blink
+          rect(-40+slight_Xm, -15+slight_Ym, 10, (frameCount+this.r)% 200-toEyeDist/50)
+          rect(30+slight_Xm, -15+slight_Ym, 10, (frameCount+this.r)% 200-toEyeDist/50)
+        }
+        else{
+          rect(-40+slight_Xm, -25+slight_Ym, 10, 30-toEyeDist/50)
+          rect(30+slight_Xm, -25+slight_Ym, 10, 30-toEyeDist/50)
+        }
       }
       fill(face_clr[0]-20,face_clr[1]-20,face_clr[2]-20)
       ellipse(-73, -20, 40, 75)
@@ -528,6 +580,13 @@ class axolotl{
       ellipse(35+slight_Xm, -50+slight_Ym, 65+slight_Xm, 35)
       pop()
 
+      // Blink
+      if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 6){
+        fill(face_clr[0], face_clr[1], face_clr[2])
+        ellipse(-40, -20, 55, 55-(frameCount+this.r)% 200)
+        ellipse(40, -20, 55, 55-(frameCount+this.r)% 200)
+      }
+
       fill('white')
       ellipse(0, -50, 50-toEyeDist/80)
       if(toEyeDist < 60){
@@ -554,6 +613,13 @@ class axolotl{
       ellipse(0, -50, 6)
       fill(face_clr[0], face_clr[1], face_clr[2])
       ellipse(0+slight_Xm, -70+slight_Ym, 60+slight_Xm, 40)
+
+      // Blink
+      if(toEyeDist >= 60 && (frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 6){
+        fill(face_clr[0], face_clr[1], face_clr[2])
+        ellipse(0, -50, 55, 50-toEyeDist/80 - (frameCount+this.r)% 200)
+      }
+
       pop()
     }
     else if(this.eyes_type%10 == 8){
@@ -590,6 +656,14 @@ class axolotl{
       rotate(-PI/12)
       rect(7,-60, 78,40)
       pop()
+
+      // Blink 
+      if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 8){
+        fill(face_clr[0], face_clr[1], face_clr[2])
+        ellipse(-40+slight_Xm, -30+slight_Ym, 65, 64-(frameCount+this.r)% 200)
+        ellipse(40+slight_Xm, -30+slight_Ym, 65, 64-(frameCount+this.r)% 200)
+      }
+
       pop()
     }
     else if(this.eyes_type%10 == 9){
@@ -603,16 +677,33 @@ class axolotl{
       fill('white')
       rect(-75+slight_Xm/5,-35, 55,30, 0, 100, 0, 100)
       fill(255-_clr[0], 255-_clr[1], 255-_clr[2])
+      if (this.r % 3 == 0){
+        fill(_clr[0], _clr[1], _clr[2])
+      }
       rect(10,-40, 70,40, 100, 0, 100, 0)
       fill('white')
       rect(20+slight_Xm/5,-35, 55,30, 100, 0, 100, 0)
       fill(255-_clr[0], 255-_clr[1], 255-_clr[2])
       ellipse(-45+slight_Xm, -20+slight_Ym/2, 24, 23)
       fill(_clr[0], _clr[1], _clr[2])
+      if (this.r % 3 == 0){
+        fill(255-_clr[0], 255-_clr[1], 255-_clr[2])
+      }
       ellipse(45+slight_Xm, -20+slight_Ym/2, 24, 23)
       fill('white')
       ellipse(-45+slight_Xm/2, -22+slight_Ym, 5)
       ellipse(45+slight_Xm/2, -22+slight_Ym, 5)
+
+      // Blink
+      if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 6){
+        fill(_clr[0], _clr[1], _clr[2])
+        rect(-75,-35, 55,28-(frameCount+this.r)% 200, 0, 100, 0, 100)
+        fill(255-_clr[0], 255-_clr[1], 255-_clr[2])
+        if (this.r % 3 == 0){
+          fill(_clr[0], _clr[1], _clr[2])
+        }
+        rect(20,-35, 55, 28-(frameCount+this.r)% 200, 100, 0, 100, 0)
+      }
       pop()
     }
   }
@@ -778,96 +869,16 @@ class axolotl{
       pop()
     }
   }
-  
-  showWeather(weather){
-    var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
-    var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
-    push()
-    translate(this.x, this.y)
-    if(weather){
-      if (isDay){
-        for(var i=0; i <100; i++){
-          // Halo of the sun
-          push()
-          translate(0, -150)
-          rotate(i*PI/100)
-          fill(250, 244, 210, 500)
-          ellipse(0, 0, 66 + random(0, 20), 66)
-          pop()
-        }
-        for(i=0; i <10; i++){
-          // The sun
-          fill(220+i*4, 152, 54-2*i, 80)
-          ellipse(0, -150, 70-4*i)
-        }
-      }
-      else{
-        for(var i=0; i <20; i++){
-          // Halo of the moon
-          fill(242, 226-i, 172, 9+i)
-          ellipse(0, -150, 90-i+random(0, 3), 90-i+random(0, 3))
-        }
-        for(i=0; i <20; i++){
-          // The moon
-          fill(243+i*2, 228, 143-2*i, 100-i)
-          ellipse(0, -150, 70-2*i)
-        }
-        // Dark part of the moon
-        fill(185, 156, 84, 80)
-        ellipse(10, -150, 53)
-        fill(185, 156, 84, 90)
-        ellipse(10, -150, 50)
-      }
-      // Show temperature
-      if(dist(mouseX, mouseY, this.x, this.y-150) < 60 && this.eyes_type%10 == 6){
-        fill("white")
-        textFont(myFont1, 40)
-        if(temp >= 100 || temp <= -10){
-          textFont(myFont1, 30)
-          text(str(int(temp)),-48, -8)
-          textFont(myFont1, 20)
-          text(str(temp_unit), 20, -20)
-        }
-        else if(temp >= 0 && temp <10){
-          textFont(myFont1, 48)
-          text(str(int(temp)),-24, -4)
-          textFont(myFont1, 25)
-          text(str(temp_unit), 12, -20)
-        }
-        else{
-          textFont(myFont1, 40)
-          text(str(int(temp)),-40, -4)
-          textFont(myFont1, 20)
-          text(str(temp_unit), 19, -18)
-        }
-      }
-      if(cloud >= 50){
-        fill("#FBFBFB")
-        ellipse(10+ slight_Xm, -150 + slight_Ym, 60)
-        ellipse(-20+ slight_Xm, -132 + slight_Ym, 50)
-        ellipse(50+ slight_Xm, -130+slight_Ym, 50)
-        fill(199, 203, 210)
-        ellipse(12+ slight_Xm, -135 + slight_Ym, 50)
-        ellipse(-15+ slight_Xm, -125 + slight_Ym, 35)
-        ellipse(45+ slight_Xm, -125+slight_Ym, 36)
-        fill("#FBFBFB")
-        ellipse(10+ slight_Xm, -150 + slight_Ym, 60)
-        ellipse(-20+ slight_Xm, -130 + slight_Ym, 30)
-        ellipse(50+ slight_Xm, -130+slight_Ym, 36)  
-      }
-    }
-    pop()
-  }
 
-  deco(deco_type, face_clr, _clr, weather, deco_on){
+  deco(deco_type, face_clr, _clr){
     noStroke()
     fill(_clr[0]+20, _clr[1]+20, _clr[2]+20)
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
 
-    if (!weather && deco_on){
-      if(deco_type%5 == 0){
+    if (deco){
+      if(deco_type%6 == 0){
         // Chick/Bird
         push()
         translate(this.x, this.y)
@@ -895,7 +906,7 @@ class axolotl{
         triangle(slight_Xm, -145-slight_Ym/2, -4+slight_Xm, -140-slight_Ym/2, 4+slight_Xm, -140-slight_Ym/2)
         pop()
       }
-      else if(deco_type%5 == 1){
+      else if(deco_type%6 == 1){
         // Hat
         push()
         translate(this.x, this.y)
@@ -909,8 +920,8 @@ class axolotl{
         triangle(17, -150, 25, -140, 19, -110)
         pop()
       }
-      else if(deco_type%5 == 2){
-        // Pointed hat
+      else if(deco_type%6 == 2){
+        // Pointed Hat
         push()
         translate(this.x, this.y)
         triangle(0, -200, -30, -110, 30, -110)
@@ -960,7 +971,7 @@ class axolotl{
         }
         pop()
       }
-      else if(deco_type%5 == 3){
+      else if(deco_type%6 == 3){
         // Crown
         push()
         translate(this.x, this.y)
@@ -1019,8 +1030,8 @@ class axolotl{
         ellipse(0, -130, 8, 11)
         pop()
       }
-      else if(deco_type%5 == 4){
-        // Awkward sign
+      else if(deco_type%6 == 4){
+        // Awkward Sign
         push()
         translate(this.x, this.y)
         fill('white')
@@ -1038,6 +1049,83 @@ class axolotl{
         rect(-80+ slight_Xm, -65, 15, 3)
         pop()
       }
+      else if(deco_type%6 == 5){
+        // Weather System
+        push()
+        translate(this.x, this.y)
+        if (isDay){
+          for(var i=0; i <100; i++){
+            // Halo of the sun
+            push()
+            translate(0, -150)
+            rotate(i*PI/100)
+            fill(250, 244, 210, 500)
+            ellipse(0, 0, 66 + random(0, 20), 66)
+            pop()
+          }
+          for(i=0; i <10; i++){
+            // The sun
+            fill(220+i*4, 152, 54-2*i, 80)
+            ellipse(0, -150, 70-4*i)
+          }
+        }
+        else{
+          for(var i=0; i <20; i++){
+            // Halo of the moon
+            fill(242, 226-i, 172, 9+i)
+            ellipse(0, -150, 90-i+random(0, 3), 90-i+random(0, 3))
+          }
+          for(i=0; i <20; i++){
+            // The moon
+            fill(243+i*2, 228, 143-2*i, 100-i)
+            ellipse(0, -150, 70-2*i)
+          }
+          // Dark part of the moon
+          fill(185, 156, 84, 80)
+          ellipse(10, -150, 53)
+          fill(185, 156, 84, 90)
+          ellipse(10, -150, 50)
+        }
+        // Show temperature
+        if(dist(mouseX, mouseY, this.x, this.y-150) < 60 && this.eyes_type%10 == 6){
+          fill("white")
+          textFont(myFont1, 40)
+          if(temp >= 100 || temp <= -10){
+            textFont(myFont1, 30)
+            text(str(int(temp)),-48, -8)
+            textFont(myFont1, 20)
+            text(str(temp_unit), 20, -20)
+          }
+          else if(temp >= 0 && temp <10){
+            textFont(myFont1, 48)
+            text(str(int(temp)),-24, -4)
+            textFont(myFont1, 25)
+            text(str(temp_unit), 12, -20)
+          }
+          else{
+            textFont(myFont1, 40)
+            text(str(int(temp)),-40, -4)
+            textFont(myFont1, 20)
+            text(str(temp_unit), 19, -18)
+          }
+        }
+        if(cloud >= 50){
+          fill("#FBFBFB")
+          ellipse(10+ slight_Xm, -150 + slight_Ym, 60)
+          ellipse(-20+ slight_Xm, -132 + slight_Ym, 50)
+          ellipse(50+ slight_Xm, -130+slight_Ym, 50)
+          fill(199, 203, 210)
+          ellipse(12+ slight_Xm, -135 + slight_Ym, 50)
+          ellipse(-15+ slight_Xm, -125 + slight_Ym, 35)
+          ellipse(45+ slight_Xm, -125+slight_Ym, 36)
+          fill("#FBFBFB")
+          ellipse(10+ slight_Xm, -150 + slight_Ym, 60)
+          ellipse(-20+ slight_Xm, -130 + slight_Ym, 30)
+          ellipse(50+ slight_Xm, -130+slight_Ym, 36)  
+        }
+        
+        pop()
+      }
     }
     
   }
@@ -1049,7 +1137,7 @@ class axolotl{
 }
 
 // Color Template
-let colors1 = "ed1c24-fdfffc-235789-f1d302-020100".split("-").map(a=>"#"+a)
+let colors1 = "ed1c24-e3e5e2-235789-f1d302-020100".split("-").map(a=>"#"+a)
 let colors2 = "2b2d42-8d99ae-edf2f4-ef233c-d80032".split("-").map(a=>"#"+a)
 let colors3 = "d6fff6-231651-4dccbd-2374ab-ff8484".split("-").map(a=>"#"+a)
 let colors4 = "a9e5bb-fcf6b1-f7b32b-f72c25-2d1e2f".split("-").map(a=>"#"+a)
@@ -1072,7 +1160,6 @@ var gill_clr1
 var gill_clr2
 var eyes_clr
 var mouth_clr
-var weather = false
 var deco = false
 let axolotls = []
 let axolotls_clr = []
@@ -1165,12 +1252,12 @@ function mousePressed(){
 }
 function keyPressed() {
   if(keyCode === LEFT_ARROW){
-    if (weather) {
-      weather = false
-    } 
-    else{
-      weather = true
-    }
+    // if (weather) {
+    //   weather = false
+    // } 
+    // else{
+    //   weather = true
+    // }
   }
   if(keyCode === RIGHT_ARROW){
     if (deco) {
@@ -1186,22 +1273,7 @@ function keyPressed() {
     } 
   }
   if(keyCode === DOWN_ARROW){
-    // face_clr[0] = random(110, 210)
-    // face_clr[1] = random(110, 210)
-    // face_clr[2] = random(110, 210)
-    // gill_clr1[0] = random(110, 210)
-    // gill_clr1[1] = random(110, 210)
-    // gill_clr1[2] = random(110, 210)
-    // gill_clr2[0] = random(110, 210)
-    // gill_clr2[1] = random(110, 210)
-    // gill_clr2[2] = random(110, 210)
-    // eyes_clr[0] = random(60, 200)
-    // eyes_clr[1] = random(60, 200)
-    // eyes_clr[2] = random(60, 200)
-    // mouth_clr[0] = random(130, 220)
-    // mouth_clr[1] = random(130, 220)
-    // mouth_clr[2] = random(130, 220)
-    // Types
+    // None
   }
 }
 
@@ -1252,15 +1324,14 @@ function drawAxot(a, a_clr){
   a.gill(a_clr[1], a_clr[2], a_clr[0])
   a.face(a_clr[0])
   a.mouth(a_clr[4], a_clr[0])
-  if(a.eyes_type%10 == 4 || a.eyes_type%10 == 7 || a_clr[5]%5 == 4){
-    a.eyes(a_clr[3], a_clr[0])
-    a.deco(a_clr[5], a_clr[0], a_clr[4], weather, deco)
+  if(a.eyes_type%10 == 4 || a.eyes_type%10 == 7 || a_clr[5]%6 == 4 || (a_clr[5]%6 == 5 && a.eyes_type%10 == 6)){
+    a.eyes(a_clr[3], a_clr[0], a_clr[5])
+    a.deco(a_clr[5], a_clr[0], a_clr[4])
   }
   else{
-    a.deco(a_clr[5], a_clr[0], a_clr[4], weather, deco)
-    a.eyes(a_clr[3], a_clr[0])
+    a.deco(a_clr[5], a_clr[0], a_clr[4])
+    a.eyes(a_clr[3], a_clr[0], a_clr[5])
   }
   
-  a.showWeather(weather)
   pop()
 }
