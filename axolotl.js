@@ -1268,9 +1268,7 @@ function keyPressed() {
     }
   }
   if(keyCode === UP_ARROW){
-    if (deco) {
-      deco_type= int(random()*100)
-    } 
+    
   }
   if(keyCode === DOWN_ARROW){
     // None
