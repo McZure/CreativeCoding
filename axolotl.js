@@ -359,8 +359,8 @@ class axolotl{
       // Blink
       if((frameCount+this.r)% 200 >= 0 && (frameCount+this.r)% 200 <= 8){
         fill(face_clr[0],face_clr[1],face_clr[2])
-        rect(-60, -50, 60, 64-(frameCount+this.r)% 200)
-        rect(0, -50, 60, 64-(frameCount+this.r)% 200)
+        rect(-60, -50, 60, 64-(frameCount+this.r)% 200*2)
+        rect(0, -50, 60, 64-(frameCount+this.r)% 200*2)
       }
 
       pop()
