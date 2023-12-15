@@ -1160,7 +1160,7 @@ function setup() {
   engine = Matter.Engine.create();
   world = engine.world;
   // Build a ground
-  let ground = Matter.Bodies.rectangle(0, height, width*2, 100, { isStatic: true });
+  let ground = Matter.Bodies.rectangle(0, height, width*2, 5, { isStatic: true });
   Matter.World.add(world, ground);
   // Create Mouse target
   let canvasMouse = Matter.Mouse.create(canvas.elt);
