@@ -33,6 +33,7 @@ class axolotl{
     var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y), sqrt(width*width+height*height)/2)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
+
     if (this.gill_type%10 == 0){
       // 1st type of gill
       // >(0_0)<
@@ -62,9 +63,10 @@ class axolotl{
       push()
       translate(this.x,this.y)
       quad(-168 + slight_Xm, -30, 168 - slight_Xm, -30, 152 - slight_Xm, -10, -152 + slight_Xm, -10)
-      quad(-150 - slight_Xm, 28, 150 + slight_Xm, 28, 166 + slight_Xm, 10, -166 - slight_Xm, 10)
       fill(_clr2[0],_clr2[1],_clr2[2])
       quad(-140 - slight_Xm, -9, +140 + slight_Xm, -9, 124 + slight_Xm, 9, -124 - slight_Xm, 9)
+      fill(_clr1[0],_clr1[1],_clr1[2])
+      quad(-150 - slight_Xm, 28, 150 + slight_Xm, 28, 166 + slight_Xm, 10, -166 - slight_Xm, 10)
       pop()
     }
     else if(this.gill_type%10 == 2){
@@ -1133,10 +1135,10 @@ class axolotl{
     
   }
 
-  update(new_x, new_y){
-    this.x = new_x
-    this.y = new_y
-  }
+  // update(new_x, new_y){
+  //   this.x = new_x
+  //   this.y = new_y
+  // }
 }
 
 // Color Template
@@ -1198,21 +1200,33 @@ function draw() {
   // Build the background using a halo effect and the face color
   background(160)
   var hue = chroma.hsl(frameCount % 360, 0.2, 0.6)
-  blendMode(MULTIPLY) // MULTIPLY - multiply the colors, result will always be darker
-  var bg_clr1 = color(hue.rgb())
-  noStroke()
-  for(var i = 0; i < width*2; i+= 56){
-    bg_clr1.setAlpha(26)
-    fill(bg_clr1)
-    if(eyes_type* gill_type% 2 == 0){
-      ellipse(width/2,height/2, i+mouseX)
-    }
-    else{
-      rect(0,0, i+mouseX, i+mouseX)
-    }
-  }
+  fill(hue.rgb())
+  textFont(myFont1, 170)
+  drawingContext.shadowColor = color(0,80)
+  drawingContext.shadowOffsetY = 5
+  drawingContext.shadowOffsetY = 5
+  drawingContext.shadowBlur = 20
+  text("Axolotl\nMonster", width/4-60, height*2/5)
+  hue = chroma.hsl((frameCount + 100) % 360, 0.4, 0.6)
+  fill(hue.rgb())
+  textFont(myFont2, 280)
+  text("Axomon", width/4, height/2-20)
+  drawingContext.shadowColor = color(0,0)
+  // blendMode(MULTIPLY) // MULTIPLY - multiply the colors, result will always be darker
+  // var bg_clr1 = color(hue.rgb())
+  // noStroke()
+  // for(var i = 0; i < width*2; i+= 56){
+  //   bg_clr1.setAlpha(26)
+  //   fill(bg_clr1)
+  //   if(eyes_type* gill_type% 2 == 0){
+  //     ellipse(width/2,height/2, i+mouseX)
+  //   }
+  //   else{
+  //     rect(0,0, i+mouseX, i+mouseX)
+  //   }
+  // }
   
-  blendMode(BLEND) // BLEND - linear interpolation of colours: C = A*factor + B. This is the default blending mode
+  // blendMode(BLEND) // BLEND - linear interpolation of colours: C = A*factor + B. This is the default blending mode
 
   for(let am=0; am < axolotls.length; am++){
     let a_color = axolotls_clr[am]
@@ -1330,7 +1344,7 @@ function drawAxot(a, a_clr){
   a.face(a_clr[0])
   // Cancel shadow effect
   drawingContext.shadowColor = color(0,0)
-  
+
   a.mouth(a_clr[4], a_clr[0])
   if(a.eyes_type%10 == 4 || a.eyes_type%10 == 7 || a_clr[5]%6 == 4 || (a_clr[5]%6 == 5 && a.eyes_type%10 == 6)){
     a.eyes(a_clr[3], a_clr[0], a_clr[5])

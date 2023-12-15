@@ -24,6 +24,7 @@ class axolotl{
     var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y), sqrt(width*width+height*height)/2)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
+
     if (this.gill_type%10 == 0){
       // 1st type of gill
       // >(0_0)<
@@ -53,9 +54,10 @@ class axolotl{
       push()
       translate(this.x,this.y)
       quad(-168 + slight_Xm, -30, 168 - slight_Xm, -30, 152 - slight_Xm, -10, -152 + slight_Xm, -10)
-      quad(-150 - slight_Xm, 28, 150 + slight_Xm, 28, 166 + slight_Xm, 10, -166 - slight_Xm, 10)
       fill(_clr2[0],_clr2[1],_clr2[2])
       quad(-140 - slight_Xm, -9, +140 + slight_Xm, -9, 124 + slight_Xm, 9, -124 - slight_Xm, 9)
+      fill(_clr1[0],_clr1[1],_clr1[2])
+      quad(-150 - slight_Xm, 28, 150 + slight_Xm, 28, 166 + slight_Xm, 10, -166 - slight_Xm, 10)
       pop()
     }
     else if(this.gill_type%10 == 2){
@@ -301,6 +303,8 @@ class axolotl{
       }
       pop()
     }
+
+    drawingContext.shadowColor = color(0,0)
   }
   
   eyes(_clr, face_clr, deco_type){
@@ -483,45 +487,11 @@ class axolotl{
         }
       }
       
-      // Weather
       if(toEyeDist < 30){
-        if(deco_type%6 == 5 && deco){
-          // The eyes will show current weather
-          if(rain){
-            hue = chroma.hsl(180+frameCount % 60, 1, 0.7)
-            fill(hue.rgb())
-            textSize(70)
-            text("☂", -30, 5)
-          }
-          else if(!rain && !snowfall && cloud >= 50){
-            hue = chroma.hsl(60+frameCount % 60, 1, 0.7)
-            fill(hue.rgb())
-            textSize(70)
-            text("☁", -30, 5)
-          }
-          else if(snowfall){
-            hue = chroma.hsl(120+frameCount % 60, 1, 0.7)
-            fill(hue.rgb())
-            textSize(70)
-            text("❄", -30, 5)
-          }
-          else{
-            hue = chroma.hsl(frameCount % 60, 1, 0.7)
-            fill(hue.rgb())
-            textSize(70)
-            text("☀", -30, 5)
-          }
-        }
-        else{
-          hue = chroma.hsl(frameCount % 360, 1, 0.7)
-          fill(hue.rgb())
-          //fill(_clr[0] + random(0, 50), _clr[1]+ random(0, 50), _clr[2]+ random(0, 50))
-          textFont(myFont1, 60)
-          text("CC", -45, 5)
-        }
-      }
-      else if(dist(mouseX, mouseY, this.x, this.y-150) < 60 && deco_type%6 == 5){
-        // Important!!! Avoid conflicts
+        hue = chroma.hsl(frameCount % 360, 1, 0.7)
+        fill(hue.rgb())
+        textFont(myFont1, 60)
+        text("CC", -45, 5)
       }
       else{
         // Eyebrows
@@ -1044,88 +1014,198 @@ class axolotl{
         pop()
       }
       else if(deco_type%6 == 5){
-        // Weather System
-        push()
-        translate(this.x, this.y)
-        if (isDay){
-          for(var i=0; i <100; i++){
-            // Halo of the sun
-            push()
-            translate(0, -150)
-            rotate(i*PI/100)
-            fill(250, 244, 210, 500)
-            ellipse(0, 0, 66 + random(0, 20), 66)
-            pop()
-          }
-          for(i=0; i <10; i++){
-            // The sun
-            fill(220+i*4, 152, 54-2*i, 80)
-            ellipse(0, -150, 70-4*i)
-          }
-        }
-        else{
-          for(var i=0; i <20; i++){
-            // Halo of the moon
-            fill(242, 226-i, 172, 9+i)
-            ellipse(0, -150, 90-i+random(0, 3), 90-i+random(0, 3))
-          }
-          for(i=0; i <20; i++){
-            // The moon
-            fill(243+i*2, 228, 143-2*i, 100-i)
-            ellipse(0, -150, 70-2*i)
-          }
-          // Dark part of the moon
-          fill(185, 156, 84, 80)
-          ellipse(10, -150, 53)
-          fill(185, 156, 84, 90)
-          ellipse(10, -150, 50)
-        }
-        // Show temperature
-        if(dist(mouseX, mouseY, this.x, this.y-150) < 60 && this.eyes_type%10 == 6){
-          fill("white")
-          textFont(myFont1, 40)
-          if(temp >= 100 || temp <= -10){
-            textFont(myFont1, 30)
-            text(str(int(temp)),-48, -8)
-            textFont(myFont1, 20)
-            text(str(temp_unit), 20, -20)
-          }
-          else if(temp >= 0 && temp <10){
-            textFont(myFont1, 48)
-            text(str(int(temp)),-24, -4)
-            textFont(myFont1, 25)
-            text(str(temp_unit), 12, -20)
-          }
-          else{
-            textFont(myFont1, 40)
-            text(str(int(temp)),-40, -4)
-            textFont(myFont1, 20)
-            text(str(temp_unit), 19, -18)
-          }
-        }
-        if(cloud >= 50){
-          fill("#FBFBFB")
-          ellipse(10+ slight_Xm, -150 + slight_Ym, 60)
-          ellipse(-20+ slight_Xm, -132 + slight_Ym, 50)
-          ellipse(50+ slight_Xm, -130+slight_Ym, 50)
-          fill(199, 203, 210)
-          ellipse(12+ slight_Xm, -135 + slight_Ym, 50)
-          ellipse(-15+ slight_Xm, -125 + slight_Ym, 35)
-          ellipse(45+ slight_Xm, -125+slight_Ym, 36)
-          fill("#FBFBFB")
-          ellipse(10+ slight_Xm, -150 + slight_Ym, 60)
-          ellipse(-20+ slight_Xm, -130 + slight_Ym, 30)
-          ellipse(50+ slight_Xm, -130+slight_Ym, 36)  
-        }
-        
-        pop()
       }
     }
     
   }
 
-  update(new_x, new_y){
-    this.x = new_x
-    this.y = new_y
+  // update(new_x, new_y){
+  //   this.x = new_x
+  //   this.y = new_y
+  // }
+}
+
+// Color Template
+let colors1 = "ed1c24-e3e5e2-235789-f1d302-020100".split("-").map(a=>"#"+a)
+let colors2 = "2b2d42-8d99ae-edf2f4-ef233c-d80032".split("-").map(a=>"#"+a)
+let colors3 = "d6fff6-231651-4dccbd-2374ab-ff8484".split("-").map(a=>"#"+a)
+let colors4 = "a9e5bb-fcf6b1-f7b32b-f72c25-2d1e2f".split("-").map(a=>"#"+a)
+let colors5 = "ff8811-f4d06f-fff8f0-9dd9d2-392f5a".split("-").map(a=>"#"+a)
+let colors6 = "c5d86d-261c15-f7f7f2-e4e6c3-f05d23".split("-").map(a=>"#"+a)
+let colors7 = "ff6700-ebebeb-c0c0c0-3a6ea5-004e98".split("-").map(a=>"#"+a)
+let colors8 = "020202-0d2818-04471c-058c42-16db65".split("-").map(a=>"#"+a)
+let colors9 = "003049-d62828-f77f00-fcbf49-eae2b7".split("-").map(a=>"#"+a)
+let colors10 = "00072d-001c55-0a2472-0e6ba8-a6e1fa".split("-").map(a=>"#"+a)
+let colors11 ="6b2d5c-f0386b-ff5376-f8c0c8-e2c290".split("-").map(a=>"#"+a)
+let colors12 = "fb8b24-d90368-820263-291720-04a777".split("-").map(a=>"#"+a)
+// Global Variables
+let colors
+var gill_type
+var eyes_type
+var mouth_type
+var deco_type
+var face_clr
+var gill_clr1
+var gill_clr2
+var eyes_clr
+var mouth_clr
+var deco = false
+let axolotls = []
+let axolotls_clr = []
+
+// Preload Function
+function preload(){
+  myFont1 = loadFont('powerPixel.ttf')
+  myFont2 = loadFont('SanstainaRegular.ttf')
+  
+}
+// ******************************* Setup Function *******************************//
+function setup() {
+  createCanvas(1600, 1200)
+  frameRate(60)
+  canvas.addEventListener('contextmenu', event => event.preventDefault());
+  // Global Variables
+  colors = random([colors1,colors2,colors3,colors4,colors5,colors6,colors7,colors8,colors9,colors10,colors11,colors12]) 
+  colors = shuffle(colors)
+  face_clr = hexToRGB(colors[0])
+  gill_clr1 = hexToRGB(colors[1])
+  gill_clr2 = hexToRGB(colors[2])
+  eyes_clr = hexToRGB(colors[3])
+  mouth_clr = hexToRGB(colors[4])
+  eyes_type= int(random()*100)
+  gill_type= 2
+  mouth_type= int(random()*100)
+  deco_type= int(random()*100)
+}
+function draw() {
+  // Build the background using a halo effect and the face color
+  background(200)
+  var hue = chroma.hsl(frameCount % 360, 0.2, 0.6)
+  fill(hue.rgb())
+  textFont(myFont1, 170)
+  drawingContext.shadowColor = color(0,80)
+  drawingContext.shadowOffsetY = 5
+  drawingContext.shadowOffsetY = 5
+  drawingContext.shadowBlur = 20
+  text("Axolotl\nMonster", width/4-60, height*2/5)
+  hue = chroma.hsl((frameCount + 100) % 360, 0.4, 0.6)
+  fill(hue.rgb())
+  textFont(myFont2, 280)
+  text("Axomon", width/4, height/2-20)
+  drawingContext.shadowColor = color(0,0)
+
+  for(let am=0; am < axolotls.length; am++){
+    let a_color = axolotls_clr[am]
+    drawAxot(axolotls[am], a_color)
   }
+}
+// ******************************* ********** *******************************//
+
+// Interaction Functions
+function mouseClicked(){
+  if (mouseButton === LEFT){
+    createAxot(mouseX, mouseY, eyes_type, gill_type, mouth_type)
+  }
+  deco_type= int(random()*100)
+}
+
+function mousePressed(){
+  if (mouseButton === RIGHT) {
+    eyes_type= int(random()*100)
+    gill_type= int(random()*100)
+    mouth_type= int(random()*100)
+    deco_type= int(random()*100)
+    createAxot(mouseX, mouseY, eyes_type, gill_type, mouth_type)
+  }
+  deco_type= int(random()*100)
+}
+function keyPressed() {
+  if(keyCode === LEFT_ARROW){
+    // if (weather) {
+    //   weather = false
+    // } 
+    // else{
+    //   weather = true
+    // }
+  }
+  if(keyCode === RIGHT_ARROW){
+    if (deco) {
+      deco = false
+    } 
+    else{
+      deco = true
+    }
+  }
+  if(keyCode === UP_ARROW){
+    
+  }
+  if(keyCode === DOWN_ARROW){
+    // None
+  }
+}
+
+
+// Helper Functions
+function randBubble(x, y){
+  fill(random(255), random(255), random(255), 200)
+  for(var j= 0; j< int(random(0, 5)); j++){
+    var sign = pow(-1, int(random(0, 100)))
+    ellipse(x+ sign*random(0, 20),y + sign*random(0, 20), random(0, 8))
+  }
+}
+
+function hexToRGB(hex) {
+  let r = parseInt(hex.slice(1, 3), 16);
+  let g = parseInt(hex.slice(3, 5), 16);
+  let b = parseInt(hex.slice(5, 7), 16);
+
+  console.log([r, g, b])
+  return [r, g, b];
+}
+
+// Axolotl Functions
+function createAxot(x, y, i_type, g_type, m_type){
+  var a = new axolotl(x, y, i_type, g_type, m_type)
+  axolotls.push(a)
+  colorAxot(face_clr, gill_clr1, gill_clr2, eyes_clr, mouth_clr, deco_type)
+}
+
+function colorAxot(f_clr, g_clr1, g_clr2, e_clr, m_clr, d_type){
+  axolotls_clr.push([f_clr, g_clr1, g_clr2, e_clr, m_clr, d_type])
+  colors = random([colors1,colors2,colors3,colors4,colors5,colors6,colors7,colors8,colors9,colors10,colors11,colors12])
+  colors = shuffle(colors)
+  face_clr = hexToRGB(colors[0])
+  gill_clr1 = hexToRGB(colors[1])
+  gill_clr2 = hexToRGB(colors[2])
+  eyes_clr = hexToRGB(colors[3])
+  mouth_clr = hexToRGB(colors[4])
+}
+
+function drawAxot(a, a_clr){
+  noStroke()
+  // Call functions to draw the axolotl
+  push()
+  a.gill(a_clr[1], a_clr[2], a_clr[0])
+  // Add shadow to face to creat layering
+  drawingContext.shadowColor = color(0,80)
+  drawingContext.shadowOffsetY = 5
+  drawingContext.shadowOffsetY = 5
+  a.face(a_clr[0])
+  // Cancel shadow effect
+  drawingContext.shadowColor = color(0,0)
+  
+  a.mouth(a_clr[4], a_clr[0])
+  if(a.eyes_type%10 == 4 || a.eyes_type%10 == 7 || a_clr[5]%6 == 4 || (a_clr[5]%6 == 5 && a.eyes_type%10 == 6)){
+    a.eyes(a_clr[3], a_clr[0], a_clr[5])
+    a.deco(a_clr[5], a_clr[0], a_clr[4])
+  }
+  else{
+    a.deco(a_clr[5], a_clr[0], a_clr[4])
+    a.eyes(a_clr[3], a_clr[0], a_clr[5])
+  }
+  if (a.mouth_type % 10 == 0){
+    a.mouth(a_clr[4], a_clr[0])
+  }
+  
+  pop()
 }
