@@ -491,18 +491,6 @@ class axolotl{
         rect(-50+slight_Xm*2, -65+slight_Ym, 18, 40, 5)
         rect(20+slight_Xm*2, -65+slight_Ym, 18, 40, 5)
       }
-      // Glasses
-      fill(_clr[0], _clr[1], _clr[2])
-      ellipse(-40-slight_Xm, -30-toEyeDist/10, 80)
-      ellipse(40-slight_Xm, -30-toEyeDist/10, 80)
-      fill(face_clr[0]+60,face_clr[1]+60,face_clr[2]+60)
-      ellipse(-40-slight_Xm, -30-toEyeDist/10, 60)
-      ellipse(40-slight_Xm, -30-toEyeDist/10, 60)
-      fill("#FBFBFB")
-      rect(-60-slight_Xm, -45-toEyeDist/10, 5, 20)
-      rect(20-slight_Xm, -45-toEyeDist/10, 5, 20)
-      rect(-60-slight_Xm, -20-toEyeDist/10, 5, 5)
-      rect(20-slight_Xm, -20-toEyeDist/10, 5, 5)
       pop()
     }
     else if(this.eyes_type%10 == 6){
@@ -523,7 +511,7 @@ class axolotl{
         hue = chroma.hsl(frameCount % 360, 1, 0.7)
         fill(hue.rgb())
         textFont(myFont1, 60)
-        text("CC", -45, 5)
+        text("AM", -45, 5)
       }
       else{
         // Eyebrows
@@ -872,6 +860,7 @@ class axolotl{
     var hue = chroma.hsl(frameCount % 360, 1, 0.8)
     var slight_Xm = map(mouseX - this.x, -width/2, width/2, -5, 5, true)
     var slight_Ym = map(mouseY - this.y, -height/2, height/2, -5, 5, true)
+    var toEyeDist = min(dist(mouseX, mouseY, this.x, this.y), sqrt(1000*1000+800*800)/2)
 
     if (deco){
       if(deco_type%6 == 0){
@@ -1046,6 +1035,21 @@ class axolotl{
         pop()
       }
       else if(deco_type%6 == 5){
+        // Glasses
+        push()
+        translate(this.x, this.y)
+        fill(_clr[0], _clr[1], _clr[2])
+        ellipse(-40-slight_Xm, -30-toEyeDist/10, 80)
+        ellipse(40-slight_Xm, -30-toEyeDist/10, 80)
+        fill(face_clr[0]+60,face_clr[1]+60,face_clr[2]+60)
+        ellipse(-40-slight_Xm, -30-toEyeDist/10, 60)
+        ellipse(40-slight_Xm, -30-toEyeDist/10, 60)
+        fill("#FBFBFB")
+        rect(-60-slight_Xm, -45-toEyeDist/10, 5, 20)
+        rect(20-slight_Xm, -45-toEyeDist/10, 5, 20)
+        rect(-60-slight_Xm, -20-toEyeDist/10, 5, 5)
+        rect(20-slight_Xm, -20-toEyeDist/10, 5, 5)
+        pop()
       }
     }
     
@@ -1281,14 +1285,14 @@ function drawAxot(a, a_clr){
   drawingContext.shadowColor = color(0,0)
   
   a.mouth(a_clr[4], a_clr[0])
-  if(a.eyes_type%10 == 4 || a.eyes_type%10 == 7 || a_clr[5]%6 == 4 || (a_clr[5]%6 == 5 && a.eyes_type%10 == 6)){
+  // if(a.eyes_type%10 == 4 || a.eyes_type%10 == 7 || a_clr[5]%6 == 4 || (a_clr[5]%6 == 5 && a.eyes_type%10 == 6)){
     a.eyes(a_clr[3], a_clr[0], a_clr[5])
     a.deco(a_clr[5], a_clr[0], a_clr[4])
-  }
-  else{
-    a.deco(a_clr[5], a_clr[0], a_clr[4])
-    a.eyes(a_clr[3], a_clr[0], a_clr[5])
-  }
+  // }
+  // else{
+  //   a.deco(a_clr[5], a_clr[0], a_clr[4])
+  //   a.eyes(a_clr[3], a_clr[0], a_clr[5])
+  // }
   if (a.mouth_type % 10 == 0){
     a.mouth(a_clr[4], a_clr[0])
   }
