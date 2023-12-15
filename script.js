@@ -1109,12 +1109,18 @@ let axolotls = []
 let axolotls_clr = []
 let bubbles = []
 let bubblePopSound
+let soundSrc = ['./sounds/hmm.wav', './sounds/hmm2.wav', './sounds/hmm3.wav', './sounds/digital.wav', './sounds/meow.wav', './sounds/toy.wav']
+let sounds = []
+let lastPlayTime = 0
 
 // Preload Function
 function preload(){
   myFont1 = loadFont('powerPixel.ttf')
   myFont2 = loadFont('SanstainaRegular.ttf')
   bubblePopSound = loadSound('./sounds/bubble.wav')
+  for (let i = 0; i < soundSrc.length; i++) {
+    sounds.push(loadSound(soundSrc[i]));
+  }
 }
 // ******************************* Setup Function *******************************//
 function setup() {
@@ -1148,10 +1154,31 @@ function setup() {
     mouse: canvasMouse,
     constraint: {
       stiffness: 0.2
+    },
+    collisionFilter: {
+      group: -1,
+      category: 0x0002,
+      mask: 0x0001,
     }
   };
   mouseConstraint = Matter.MouseConstraint.create(engine, options);
   Matter.World.add(world, mouseConstraint);
+
+  Matter.Events.on(engine, 'collisionStart', function(event) {
+    let pairs = event.pairs;
+
+    for (let i = 0; i < pairs.length; i++) {
+      let bodyA = pairs[i].bodyA;
+      let bodyB = pairs[i].bodyB;
+      let currentTime = millis();
+      if (currentTime - lastPlayTime > 150) {
+        sounds[sounds.length - 1].setVolume(0.2)
+        sounds[sounds.length - 1].play()
+      }
+      lastPlayTime = currentTime;
+      
+    }
+  });
 }
 function draw() {
   // Build the background using a halo effect and the face color
@@ -1197,8 +1224,9 @@ function mousePressed(){
     mouth_type= int(random()*100)
     deco_type= int(random()*100)
     createAxot(mouseX, mouseY, eyes_type, gill_type, mouth_type)
+    playRandomSound()
   }
-  deco_type= int(random()*100)
+  
 }
 function keyPressed() {
   if(keyCode === LEFT_ARROW){
@@ -1313,5 +1341,14 @@ function removeAxolotl(index) {
     let b = new Bubble(mouseX + random(-100, 100), mouseY + random(-100, 100));
     bubbles.push(b);
   }
+  bubblePopSound.setVolume(0.5)
   bubblePopSound.play()
+}
+
+function playRandomSound() {
+  if (sounds.length > 1) {
+    let s = floor(random(sounds.length - 1))
+    sounds[s].setVolume(0.3)
+    sounds[s].play()
+  }
 }
