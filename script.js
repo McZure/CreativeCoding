@@ -37,7 +37,11 @@ class axolotl{
     this.mouth_type = mouth_type
     this.r = int(random(0, 200))
     // Matter.js
-    this.body = Matter.Bodies.rectangle(this.x, this.y, 200, 200); // 假设 Axolotl 是一个矩形
+    this.body = Matter.Bodies.rectangle(this.x, this.y, 180, 200, {
+      frictionAir: 0.02,
+      friction: 0.005,
+      density: 1,
+      mass: 16}); // 假设 Axolotl 是一个矩形
     Matter.World.add(world, this.body);
   }
 
@@ -1040,16 +1044,26 @@ class axolotl{
         push()
         translate(this.x, this.y)
         fill(_clr[0], _clr[1], _clr[2])
-        ellipse(-40-slight_Xm, -30-toEyeDist/10, 80)
-        ellipse(40-slight_Xm, -30-toEyeDist/10, 80)
-        fill(face_clr[0]+60,face_clr[1]+60,face_clr[2]+60)
-        ellipse(-40-slight_Xm, -30-toEyeDist/10, 60)
-        ellipse(40-slight_Xm, -30-toEyeDist/10, 60)
-        fill("#FBFBFB")
-        rect(-60-slight_Xm, -45-toEyeDist/10, 5, 20)
-        rect(20-slight_Xm, -45-toEyeDist/10, 5, 20)
-        rect(-60-slight_Xm, -20-toEyeDist/10, 5, 5)
-        rect(20-slight_Xm, -20-toEyeDist/10, 5, 5)
+        if(this.eyes_type%10 == 4){
+          ellipse(-slight_Xm, -30-toEyeDist/10, 120)
+          fill(face_clr[0]+60,face_clr[1]+60,face_clr[2]+60)
+          ellipse(-slight_Xm, -30-toEyeDist/10, 100)
+          fill("#FBFBFB")
+          rect(-40-slight_Xm, -45-toEyeDist/10, 5, 20)
+          rect(-40-slight_Xm, -20-toEyeDist/10, 5, 5)
+        }
+        else{
+          ellipse(-40-slight_Xm, -20-toEyeDist/10, 80)
+          ellipse(40-slight_Xm, -20-toEyeDist/10, 80)
+          fill(face_clr[0]+60,face_clr[1]+60,face_clr[2]+60)
+          ellipse(-40-slight_Xm, -20-toEyeDist/10, 60)
+          ellipse(40-slight_Xm, -20-toEyeDist/10, 60)
+          fill("#FBFBFB")
+          rect(-60-slight_Xm, -35-toEyeDist/10, 5, 20)
+          rect(20-slight_Xm, -35-toEyeDist/10, 5, 20)
+          rect(-60-slight_Xm, -10-toEyeDist/10, 5, 5)
+          rect(20-slight_Xm, -10-toEyeDist/10, 5, 5)
+        }
         pop()
       }
     }
