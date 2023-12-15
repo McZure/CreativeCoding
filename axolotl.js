@@ -191,6 +191,7 @@ class axolotl{
       // 8th type of gill
       // ⋱(0_0)⋰
       fill(hue.rgb())
+      // fill(_clr1[0],_clr1[1],_clr1[2])
       push()
       translate(this.x, this.y)
       rect(80+frameCount%15, 20+ slight_Ym, 50, 25)
@@ -201,6 +202,7 @@ class axolotl{
       rect(-165-(20+frameCount)%15, -20+ slight_Ym, 15)
       hue = chroma.hsl(frameCount % 360, 1, 0.5)
       fill(hue.rgb())
+      //fill(_clr1[0] + 15,_clr1[1] + 15,_clr1[2] + 15)
       rect(65+frameCount%15, -15+ slight_Ym, 50, 25)
       rect(110+(10+frameCount)%15, -40+ slight_Ym, 25)
       rect(130+(20+frameCount)%15, -60+ slight_Ym, 20)
@@ -209,6 +211,7 @@ class axolotl{
       rect(-150-(20+frameCount)%15, -60+ slight_Ym, 20)
       hue = chroma.hsl(10+frameCount % 360, 1, 0.5)
       fill(hue.rgb())
+      // fill(_clr1[0] + 35,_clr1[1] + 35,_clr1[2] + 35)
       rect(50+frameCount%15, -55+ slight_Ym, 50, 20)
       rect(95+(10+frameCount)%15, -70+ slight_Ym, 15)
       rect(-100-frameCount%15, -55+ slight_Ym, 50, 20)
@@ -1327,6 +1330,7 @@ function drawAxot(a, a_clr){
   a.face(a_clr[0])
   // Cancel shadow effect
   drawingContext.shadowColor = color(0,0)
+  
   a.mouth(a_clr[4], a_clr[0])
   if(a.eyes_type%10 == 4 || a.eyes_type%10 == 7 || a_clr[5]%6 == 4 || (a_clr[5]%6 == 5 && a.eyes_type%10 == 6)){
     a.eyes(a_clr[3], a_clr[0], a_clr[5])
@@ -1335,6 +1339,9 @@ function drawAxot(a, a_clr){
   else{
     a.deco(a_clr[5], a_clr[0], a_clr[4])
     a.eyes(a_clr[3], a_clr[0], a_clr[5])
+  }
+  if (a.mouth_type % 10 == 0){
+    a.mouth(a_clr[4], a_clr[0])
   }
   
   pop()
