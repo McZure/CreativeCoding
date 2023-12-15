@@ -1,3 +1,32 @@
+let engine // Matter.js
+let mouseConstraint
+
+class Bubble {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.radius = random(5, 28);
+    this.shrinking = random(0.2, 0.5); // Shrinking rate
+  }
+
+  update() {
+    // Shrink the bubble
+    this.radius -= this.shrinking;
+    if (this.radius <= 0) {
+      this.radius = 0;
+      return true; // Indicate that the bubble has disppeared
+    }
+    return false;
+  }
+
+  show() {
+    noFill()
+    stroke(255)
+    strokeWeight(random(2, 3))
+    ellipse(this.x, this.y, this.radius * 2)
+  }
+}
+
 class axolotl{
   constructor(x, y, eyes_type, gill_type, mouth_type){
     this.x = x
@@ -6,6 +35,9 @@ class axolotl{
     this.gill_type = gill_type
     this.mouth_type = mouth_type
     this.r = int(random(0, 200))
+    // Matter.js
+    this.body = Matter.Bodies.rectangle(this.x, this.y, 200, 200); // 假设 Axolotl 是一个矩形
+    Matter.World.add(world, this.body);
   }
 
   // function used to construct the face, primarily by changing colors to create differences.
@@ -1019,10 +1051,29 @@ class axolotl{
     
   }
 
-  // update(new_x, new_y){
-  //   this.x = new_x
-  //   this.y = new_y
-  // }
+  update() {
+    // Update the position of the object
+    this.x = this.body.position.x;
+    this.y = this.body.position.y;
+    this.angle = this.body.angle;
+    // Check if the target leaves the canvas too far
+    if (this.x < -1000 || this.x > width + 1000 || 
+      this.y < -1000 || this.y > height + 1000) {
+      this.remove(); // If so, remove it to release some memory
+    }
+  }
+
+  remove() {
+    // Remove the object from Matter.js World
+    Matter.World.remove(world, this.body);
+
+    // Find the corresponding data
+    let index = axolotls.indexOf(this);
+    if (index > -1) {
+      axolotls.splice(index, 1);
+      axolotls_clr.splice(index, 1);
+    }
+  }
 }
 
 // Color Template
@@ -1052,6 +1103,7 @@ var mouth_clr
 var deco = false
 let axolotls = []
 let axolotls_clr = []
+let bubbles = []
 
 // Preload Function
 function preload(){
@@ -1076,11 +1128,31 @@ function setup() {
   gill_type= 2
   mouth_type= int(random()*100)
   deco_type= int(random()*100)
+
+  // Initialize Matter.js
+  engine = Matter.Engine.create();
+  world = engine.world;
+  // Build a ground
+  let ground = Matter.Bodies.rectangle(0, height, width*2, 100, { isStatic: true });
+  Matter.World.add(world, ground);
+  // Create Mouse target
+  let canvasMouse = Matter.Mouse.create(canvas.elt);
+  canvasMouse.pixelRatio = pixelDensity(); // Adapt the pixel density
+  // Create MouseConstraint
+  let options = {
+    mouse: canvasMouse,
+    constraint: {
+      stiffness: 0.2
+    }
+  };
+  mouseConstraint = Matter.MouseConstraint.create(engine, options);
+  Matter.World.add(world, mouseConstraint);
 }
 function draw() {
   // Build the background using a halo effect and the face color
   background(200)
   var hue = chroma.hsl(frameCount % 360, 0.2, 0.6)
+  noStroke()
   fill(hue.rgb())
   textFont(myFont1, 170)
   drawingContext.shadowColor = color(0,80)
@@ -1094,21 +1166,25 @@ function draw() {
   text("Axomon", width/4, height/2-20)
   drawingContext.shadowColor = color(0,0)
 
+  for (let i = bubbles.length - 1; i >= 0; i--) {
+    let b = bubbles[i];
+    if (b.update()) {
+      bubbles.splice(i, 1); // Remove from array when the bubble disppear
+    } else {
+      b.show();
+    }
+  }
+
+  Matter.Engine.update(engine);
   for(let am=0; am < axolotls.length; am++){
     let a_color = axolotls_clr[am]
     drawAxot(axolotls[am], a_color)
+    axolotls[am].update() // Matter.js
   }
 }
 // ******************************* ********** *******************************//
 
 // Interaction Functions
-function mouseClicked(){
-  if (mouseButton === LEFT){
-    createAxot(mouseX, mouseY, eyes_type, gill_type, mouth_type)
-  }
-  deco_type= int(random()*100)
-}
-
 function mousePressed(){
   if (mouseButton === RIGHT) {
     eyes_type= int(random()*100)
@@ -1139,9 +1215,19 @@ function keyPressed() {
   if(keyCode === UP_ARROW){
     
   }
-  if(keyCode === DOWN_ARROW){
-    // None
+  if(key === 'D' || key === 'd'){
+    if (axolotls.length > 0) {
+      for (let i = axolotls.length - 1; i >= 0; i--) {
+        let axolotl = axolotls[i];
+        let distance = dist(mouseX, mouseY, axolotl.x, axolotl.y);
+        if (distance < 110) { // Check if the mouse is on the target Axolotl
+          removeAxolotl(i);
+          break; // Exit the loop to avoid wrong deleting
+        }
+      }
+    }
   }
+  
 }
 
 
@@ -1208,4 +1294,18 @@ function drawAxot(a, a_clr){
   }
   
   pop()
+}
+
+function removeAxolotl(index) {
+  // Remove the object from Matter.js World
+  Matter.World.remove(world, axolotls[index].body)
+
+  // Remove from arraies
+  axolotls.splice(index, 1)
+  axolotls_clr.splice(index, 1)
+  let bubbleCount = random(9, 23);
+  for (let i = 0; i < bubbleCount; i++) {
+    let b = new Bubble(mouseX + random(-100, 100), mouseY + random(-100, 100));
+    bubbles.push(b);
+  }
 }
