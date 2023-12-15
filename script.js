@@ -1229,15 +1229,7 @@ function mousePressed(){
   
 }
 function keyPressed() {
-  if(keyCode === LEFT_ARROW){
-    // if (weather) {
-    //   weather = false
-    // } 
-    // else{
-    //   weather = true
-    // }
-  }
-  if(keyCode === RIGHT_ARROW){
+  if(key === 'D' || key === 'd'){
     if (deco) {
       deco = false
     } 
@@ -1245,10 +1237,8 @@ function keyPressed() {
       deco = true
     }
   }
-  if(keyCode === UP_ARROW){
-    
-  }
-  if(key === 'D' || key === 'd'){
+
+  if(key === 'R' || key === 'r'){
     if (axolotls.length > 0) {
       for (let i = axolotls.length - 1; i >= 0; i--) {
         let axolotl = axolotls[i];
