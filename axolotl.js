@@ -1320,7 +1320,13 @@ function drawAxot(a, a_clr){
   // Call functions to draw the axolotl
   push()
   a.gill(a_clr[1], a_clr[2], a_clr[0])
+  // Add shadow to face to creat layering
+  drawingContext.shadowColor = color(0,80)
+  drawingContext.shadowOffsetY = 5
+  drawingContext.shadowOffsetY = 5
   a.face(a_clr[0])
+  // Cancel shadow effect
+  drawingContext.shadowColor = color(0,0)
   a.mouth(a_clr[4], a_clr[0])
   if(a.eyes_type%10 == 4 || a.eyes_type%10 == 7 || a_clr[5]%6 == 4 || (a_clr[5]%6 == 5 && a.eyes_type%10 == 6)){
     a.eyes(a_clr[3], a_clr[0], a_clr[5])
