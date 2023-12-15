@@ -1,5 +1,57 @@
+@font-face {
+    font-family: 'powerPixel';
+    src: url('./powerPixel.ttf') format('truetype');
+}
+
 *{
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+}
+
+body {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+	color: gray;
+	font-family: 'powerPixel';
+    font-size: 90px;
+	margin-bottom: 20px;
+}
+
+h3 {
+	color: green; 
+    /* background-color: rgba(255, 0, 0, 0.3); */
+	font-family: 'powerPixel';
+    text-align: center;
+    font-size: 23px;
+	margin-bottom: 9px;
+}
+
+.scrolling-title {
+    width: 145%;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+@keyframes scrollTitle {
+    0% { transform: translateX(100%); } 
+    100% { transform: translateX(-100%); }
+}
+
+.scrolling-title {
+    display: inline-block;
+    animation: scrollTitle 30s linear infinite;
+}
+
+#text-description {
+    margin-top: 20px;
 }

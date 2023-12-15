@@ -1,4 +1,5 @@
 let engine // Matter.js
+let world
 let mouseConstraint
 
 class Bubble {
@@ -1124,9 +1125,10 @@ function preload(){
 }
 // ******************************* Setup Function *******************************//
 function setup() {
-  createCanvas(1600, 1200)
+  let canvas = createCanvas(1600, 1200)
+  canvas.parent('canvas-container')
   frameRate(60)
-  canvas.addEventListener('contextmenu', event => event.preventDefault());
+  canvas.elt.addEventListener('contextmenu', event => event.preventDefault());
   // Global Variables
   colors = random([colors1,colors2,colors3,colors4,colors5,colors6,colors7,colors8,colors9,colors10,colors11,colors12]) 
   colors = shuffle(colors)
@@ -1179,6 +1181,17 @@ function setup() {
       
     }
   });
+
+  // Outside settings
+  let title = document.getElementById('scrolling-title');
+  let originalText = title.innerText;
+  
+  let repeatedText = originalText;
+  for (let i = 0; i < 9; i++) {
+      repeatedText += ' ' + originalText;
+  }
+  
+  title.innerText = repeatedText;
 }
 function draw() {
   // Build the background using a halo effect and the face color
