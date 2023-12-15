@@ -1108,12 +1108,13 @@ var deco = false
 let axolotls = []
 let axolotls_clr = []
 let bubbles = []
+let bubblePopSound
 
 // Preload Function
 function preload(){
   myFont1 = loadFont('powerPixel.ttf')
   myFont2 = loadFont('SanstainaRegular.ttf')
-  
+  bubblePopSound = loadSound('./sounds/bubble.wav')
 }
 // ******************************* Setup Function *******************************//
 function setup() {
@@ -1312,4 +1313,5 @@ function removeAxolotl(index) {
     let b = new Bubble(mouseX + random(-100, 100), mouseY + random(-100, 100));
     bubbles.push(b);
   }
+  bubblePopSound.play()
 }
