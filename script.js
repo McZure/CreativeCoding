@@ -1140,7 +1140,7 @@ function preload(){
 }
 // ******************************* Setup Function *******************************//
 function setup() {
-  let canvas = createCanvas(1600, 1200)
+  let canvas = createCanvas(1800, 1000)
   canvas.parent('canvas-container')
   frameRate(60)
   canvas.elt.addEventListener('contextmenu', event => event.preventDefault());
@@ -1219,11 +1219,11 @@ function draw() {
   drawingContext.shadowOffsetY = 5
   drawingContext.shadowOffsetY = 5
   drawingContext.shadowBlur = 20
-  text("        Axolotl\n       Monster", width/4-60, height*2/5)
+  text("        Axolotl\n       Monster", width/4, height*2/5)
   hue = chroma.hsl((frameCount + 100) % 360, 0.4, 0.6)
   fill(hue.rgb())
   textFont(myFont2, 95)
-  text("Axomon", width/3, height/2-40)
+  text("Axomon", width/3+50, height/2-20)
   drawingContext.shadowColor = color(0,0)
 
   for (let i = bubbles.length - 1; i >= 0; i--) {
@@ -1269,7 +1269,7 @@ function keyPressed() {
   if(key === 'A' || key === 'a'){
     if (axolotls.length == 0) {
       for(let col = 0; col < 10; col++){
-        for (let row = 0; row < 6; row ++){
+        for (let row = 0; row < 5; row ++){
           eyes_type= int(random()*100)
           gill_type= int(random()*100)
           mouth_type= int(random()*100)

@@ -16,11 +16,13 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+}
+
+.center-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 h1 {
@@ -36,13 +38,15 @@ h3 {
 	font-family: 'regular';
     text-align: center;
     font-size: 40px;
-	margin-bottom: 9px;
+	margin-bottom: 10px;
 }
 
 .scrolling-title {
-    width: 204%;
+    width: 150%;
     white-space: nowrap;
     box-sizing: border-box;
+    display: inline-block;
+    animation: scrollTitle 15s linear infinite;
 }
 
 @keyframes scrollTitle {
@@ -50,12 +54,22 @@ h3 {
     100% { transform: translateX(-100%); }
 }
 
-.scrolling-title {
-    display: inline-block;
-    animation: scrollTitle 16s linear infinite;
-}
-
 #text-description {
     margin-top: 20px;
 	font-family: 'regular';
 }
+
+#canvas-container {
+    width: 100%;
+    height: 100%;
+}
+
+#bubble-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
