@@ -24,15 +24,15 @@ body {
 }
 
 h1 {
-	color: rgb(30, 129, 21);
+	color: rgb(77, 105, 113);
 	font-family: 'semibold';
     font-size: 90px;
 	margin-bottom: 20px;
 }
 
 h3 {
-	color: rgba(24, 167, 206, 0.886); 
-    background-color: rgba(255, 0, 0, 0.3);
+	color: rgba(77, 105, 113, 0.886); 
+    /* background-color: rgba(255, 0, 0, 0.3); */
 	font-family: 'regular';
     text-align: center;
     font-size: 40px;
@@ -40,7 +40,7 @@ h3 {
 }
 
 .scrolling-title {
-    width: 123%;
+    width: 200%;
     white-space: nowrap;
     box-sizing: border-box;
 }
@@ -52,7 +52,7 @@ h3 {
 
 .scrolling-title {
     display: inline-block;
-    animation: scrollTitle 30s linear infinite;
+    animation: scrollTitle 16s linear infinite;
 }
 
 #text-description {

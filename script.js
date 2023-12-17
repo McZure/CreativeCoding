@@ -1130,8 +1130,8 @@ let lastPlayTime = 0
 
 // Preload Function
 function preload(){
-  myFont1 = loadFont('powerPixel.ttf')
-  myFont2 = loadFont('SanstainaRegular.ttf')
+  myFont1 = loadFont('Staatliches-Regular.ttf')
+  myFont2 = loadFont('RubikMonoOne-Regular.ttf')
   bubblePopSound = loadSound('./sounds/bubble.wav')
   for (let i = 0; i < soundSrc.length; i++) {
     sounds.push(loadSound(soundSrc[i]));
@@ -1201,8 +1201,8 @@ function setup() {
   let originalText = title.innerText;
   
   let repeatedText = originalText;
-  for (let i = 0; i < 9; i++) {
-      repeatedText += ' ' + originalText;
+  for (let i = 0; i < 50; i++) {
+      repeatedText += ' ' + '♦' + ' ' + originalText;
   }
   
   title.innerText = repeatedText;
@@ -1218,11 +1218,11 @@ function draw() {
   drawingContext.shadowOffsetY = 5
   drawingContext.shadowOffsetY = 5
   drawingContext.shadowBlur = 20
-  text("Axolotl\nMonster", width/4-60, height*2/5)
+  text("        Axolotl\n       Monster", width/4-60, height*2/5)
   hue = chroma.hsl((frameCount + 100) % 360, 0.4, 0.6)
   fill(hue.rgb())
-  textFont(myFont2, 280)
-  text("Axomon", width/4, height/2-20)
+  textFont(myFont2, 95)
+  text("Axomon", width/3, height/2-40)
   drawingContext.shadowColor = color(0,0)
 
   for (let i = bubbles.length - 1; i >= 0; i--) {
