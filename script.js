@@ -24,6 +24,7 @@ class Bubble {
     noFill()
     stroke(255)
     strokeWeight(random(2, 3))
+    // fill("white")
     ellipse(this.x, this.y, this.radius * 2)
   }
 }
@@ -1225,6 +1226,7 @@ function draw() {
   text("Axomon", width/3+50, height/2-20)
   drawingContext.shadowColor = color(0,0)
 
+  // Bubbles when remove objects
   for (let i = bubbles.length - 1; i >= 0; i--) {
     let b = bubbles[i];
     if (b.update()) {
@@ -1233,6 +1235,7 @@ function draw() {
       b.show();
     }
   }
+
 
   Matter.Engine.update(engine);
   if (occlusion){
@@ -1251,7 +1254,7 @@ function draw() {
     axolotls[am].update() // Matter.js
   }
 
-  // Bubbles
+  // Front Set Bubbles
   if (frameCount >= nextBubbleTime) {
     let numBubbles = floor(random(9, 23));
 		for(let b = 0; b < int(random(0, 5)); b++){
@@ -1273,6 +1276,7 @@ function draw() {
       bkg[i].x += random(-3, 3);
     }
   }
+
 }
 // ******************************* ********** *******************************//
 
