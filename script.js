@@ -1127,6 +1127,7 @@ let bubblePopSound
 let soundSrc = ['./sounds/hmm.wav', './sounds/hmm2.wav', './sounds/hmm3.wav', './sounds/digital.wav', './sounds/meow.wav', './sounds/toy.wav']
 let sounds = []
 let lastPlayTime = 0
+let occlusion = false
 
 // Preload Function
 function preload(){
@@ -1160,7 +1161,7 @@ function setup() {
   engine = Matter.Engine.create();
   world = engine.world;
   // Build a ground
-  let ground = Matter.Bodies.rectangle(0, height, width*2, 5, { isStatic: true });
+  let ground = Matter.Bodies.rectangle(50, height+50, width*2, 100, { isStatic: true });
   Matter.World.add(world, ground);
   // Create Mouse target
   let canvasMouse = Matter.Mouse.create(canvas.elt);
@@ -1235,6 +1236,16 @@ function draw() {
   }
 
   Matter.Engine.update(engine);
+  if (occlusion){
+    for(let am=0; am < axolotls.length; am++){
+      let a_color = axolotls_clr[am]
+      push()
+      axolotls[am].gill(a_color[1], a_color[2], a_color[0])
+      pop()
+      axolotls[am].update() // Matter.js
+    }
+  }
+  
   for(let am=0; am < axolotls.length; am++){
     let a_color = axolotls_clr[am]
     drawAxot(axolotls[am], a_color)
@@ -1262,6 +1273,15 @@ function keyPressed() {
     } 
     else{
       deco = true
+    }
+  }
+
+  if(key === 'O' || key === 'o'){
+    if (occlusion) {
+      occlusion = false
+    } 
+    else{
+      occlusion = true
     }
   }
 
@@ -1321,7 +1341,9 @@ function drawAxot(a, a_clr){
   noStroke()
   // Call functions to draw the axolotl
   push()
-  a.gill(a_clr[1], a_clr[2], a_clr[0])
+  if (!occlusion){
+    a.gill(a_clr[1], a_clr[2], a_clr[0])
+  }
   // Add shadow to face to creat layering
   drawingContext.shadowColor = color(0,80)
   drawingContext.shadowOffsetY = 5
@@ -1332,8 +1354,8 @@ function drawAxot(a, a_clr){
   
   a.mouth(a_clr[4], a_clr[0])
   // if(a.eyes_type%10 == 4 || a.eyes_type%10 == 7 || a_clr[5]%6 == 4 || (a_clr[5]%6 == 5 && a.eyes_type%10 == 6)){
-    a.eyes(a_clr[3], a_clr[0], a_clr[5])
-    a.deco(a_clr[5], a_clr[0], a_clr[4])
+  a.eyes(a_clr[3], a_clr[0], a_clr[5])
+  a.deco(a_clr[5], a_clr[0], a_clr[4])
   // }
   // else{
   //   a.deco(a_clr[5], a_clr[0], a_clr[4])
