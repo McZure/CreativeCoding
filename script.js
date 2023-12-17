@@ -1209,7 +1209,6 @@ function setup() {
   title.innerText = repeatedText;
 }
 function draw() {
-  // Build the background using a halo effect and the face color
   background(200)
   var hue = chroma.hsl(frameCount % 360, 0.2, 0.6)
   noStroke()
@@ -1250,6 +1249,29 @@ function draw() {
     let a_color = axolotls_clr[am]
     drawAxot(axolotls[am], a_color)
     axolotls[am].update() // Matter.js
+  }
+
+  // Bubbles
+  if (frameCount >= nextBubbleTime) {
+    let numBubbles = floor(random(9, 23));
+		for(let b = 0; b < int(random(0, 5)); b++){
+			createBubbles(random(0, width), height, numBubbles)
+		}
+    
+    // 设置下一次创建气泡的时间
+    nextBubbleTime = frameCount + int(random(60, 150)); // 随机时间间隔（例如，60到240帧之间）
+  }
+	
+	for (let i = bkg.length - 1; i >= 0; i--) {
+    bkg[i].update();
+    bkg[i].show();
+
+    if (bkg[i].radius <= 0 || bkg[i].y <= 0) {
+      bkg.splice(i, 1);
+    } else {
+      bkg[i].y -= 6;
+      bkg[i].x += random(-3, 3);
+    }
   }
 }
 // ******************************* ********** *******************************//

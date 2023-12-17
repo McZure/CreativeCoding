@@ -66,12 +66,12 @@
 //       .startTween()
 //   }
 //   // chroma.scale(['yellow', 'blue']) 制作渐变色
-class Bubble {
+class BubbleBkg {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.radius = random(5, 26);
-    this.shrinking = random(0.2, 0.5); // Shrinking rate
+    this.radius = random(5, 15);
+    this.shrinking = random(0.05, 0.5); // Shrinking rate
   }
 
   update() {
@@ -86,57 +86,29 @@ class Bubble {
 
   show() {
 		noStroke()
-    fill("#C8C8C8")
+    fill("white")
     // stroke(255)
     // strokeWeight(random(1, 3))
     ellipse(this.x, this.y, this.radius * 2)
   }
 }
 
-let bubbles = []
+let bkg = []
 let nextBubbleTime = 0
 
-function setup() {
-  let canvas = createCanvas(windowWidth, windowHeight);
-  canvas.id('bubble-background');
-  // canvas.style('position', 'fixed');
-  // canvas.style('top', '0');
-  // canvas.style('left', '0');
-  // canvas.style('z-index', '-1');
-}
+// function setup() {
+//   let canvas = createCanvas(windowWidth, windowHeight);
+//   canvas.id('bubble-background');
+// }
 
-function draw() {
-	background(255);
+// function draw() {
+// 	background(255);
 	
-	if (frameCount >= nextBubbleTime) {
-    let numBubbles = floor(random(9, 23));
-		for(let b = 0; b < int(random(0, 5)); b++){
-			createBubbles(random(0, width), height, numBubbles)
-		}
-    
-    // 设置下一次创建气泡的时间
-    nextBubbleTime = frameCount + int(random(60, 150)); // 随机时间间隔（例如，60到240帧之间）
-  }
 	
-	for (let i = bubbles.length - 1; i >= 0; i--) {
-    bubbles[i].update();
-    bubbles[i].show();
-
-    if (bubbles[i].radius <= 0 || bubbles[i].y <= 0) {
-      bubbles.splice(i, 1);
-    } else {
-      bubbles[i].y -= 6;
-      bubbles[i].x += random(-3, 3);
-    }
-  }
-}
+// }
 
 function createBubbles(x, y, number) {
   for (let i = 0; i < number; i++) {
-    bubbles.push(new Bubble(x+ random(10, 60), y+ random(-50, 50)));
+    bkg.push(new BubbleBkg(x+ random(10, 60), y+ random(-50, 50)));
   }
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
 }
