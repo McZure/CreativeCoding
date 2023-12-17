@@ -1177,10 +1177,11 @@ function preload(){
 }
 // ******************************* Setup Function *******************************//
 function setup() {
-  createCanvas(1600, 1200)
+  let canvas = createCanvas(1600, 1200)
+  canvas.parent('canvas-container')
   frameRate(60)
   apiRequest()
-  canvas.addEventListener('contextmenu', event => event.preventDefault());
+  canvas.elt.addEventListener('contextmenu', event => event.preventDefault());
 
   // Global Variables
   colors = random([colors1,colors2,colors3,colors4,colors5,colors6,colors7,colors8,colors9,colors10,colors11,colors12]) 
@@ -1194,6 +1195,17 @@ function setup() {
   gill_type= int(random()*100)
   mouth_type= int(random()*100)
   deco_type= int(random()*100)
+
+  // Outside settings
+  let title = document.getElementById('scrolling-title');
+  let originalText = title.innerText;
+  
+  let repeatedText = originalText;
+  for (let i = 0; i < 50; i++) {
+      repeatedText += ' ' + '♦' + ' ' + originalText;
+  }
+  
+  title.innerText = repeatedText;
 }
 // ******************************* Draw Function *******************************//
 function draw() {
@@ -1311,9 +1323,6 @@ function hexToRGB(hex) {
   return [r, g, b];
 }
 
-function backgrounds(){
-
-}
 // Axolotl Functions
 function createAxot(x, y, i_type, g_type, m_type){
   var a = new axolotl(x, y, i_type, g_type, m_type)
