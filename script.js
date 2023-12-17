@@ -1262,11 +1262,29 @@ function mousePressed(){
     mouth_type= int(random()*100)
     deco_type= int(random()*100)
     createAxot(mouseX, mouseY, eyes_type, gill_type, mouth_type)
-    playRandomSound()
   }
   
 }
 function keyPressed() {
+  if(key === 'A' || key === 'a'){
+    if (axolotls.length == 0) {
+      for(let col = 0; col < 10; col++){
+        for (let row = 0; row < 6; row ++){
+          eyes_type= int(random()*100)
+          gill_type= int(random()*100)
+          mouth_type= int(random()*100)
+          deco_type= int(random()*100)
+          createAxot(col*200, row*200, eyes_type, gill_type, mouth_type)
+        }
+      }
+    }
+    else{
+      for (let i = axolotls.length - 1; i >= 0; i--) {
+        removeAxolotl(i)
+      }
+    }
+  }
+
   if(key === 'D' || key === 'd'){
     if (deco) {
       deco = false
@@ -1291,7 +1309,7 @@ function keyPressed() {
         let axolotl = axolotls[i];
         let distance = dist(mouseX, mouseY, axolotl.x, axolotl.y);
         if (distance < 110) { // Check if the mouse is on the target Axolotl
-          removeAxolotl(i);
+          removeAxolotl(i)
           break; // Exit the loop to avoid wrong deleting
         }
       }
@@ -1324,6 +1342,7 @@ function createAxot(x, y, i_type, g_type, m_type){
   var a = new axolotl(x, y, i_type, g_type, m_type)
   axolotls.push(a)
   colorAxot(face_clr, gill_clr1, gill_clr2, eyes_clr, mouth_clr, deco_type)
+  playRandomSound()
 }
 
 function colorAxot(f_clr, g_clr1, g_clr2, e_clr, m_clr, d_type){
@@ -1373,13 +1392,13 @@ function removeAxolotl(index) {
   Matter.World.remove(world, axolotls[index].body)
 
   // Remove from arraies
-  axolotls.splice(index, 1)
-  axolotls_clr.splice(index, 1)
   let bubbleCount = random(9, 23);
   for (let i = 0; i < bubbleCount; i++) {
-    let b = new Bubble(mouseX + random(-100, 100), mouseY + random(-100, 100));
+    let b = new Bubble(axolotls[index].x + random(-100, 100), axolotls[index].y + random(-100, 100));
     bubbles.push(b);
   }
+  axolotls.splice(index, 1)
+  axolotls_clr.splice(index, 1)
   bubblePopSound.setVolume(0.5)
   bubblePopSound.play()
 }
