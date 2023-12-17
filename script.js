@@ -516,7 +516,7 @@ class axolotl{
         hue = chroma.hsl(frameCount % 360, 1, 0.7)
         fill(hue.rgb())
         textFont(myFont1, 60)
-        text("AM", -45, 5)
+        text("•A•M•", -45, 5)
       }
       else{
         // Eyebrows
