@@ -1341,6 +1341,10 @@ function keyPressed() {
       }
     }
   }
+
+  if( key === 'S' || key === 's'){
+    saveCanvas(canvas, 'yourAxomon_' + str(year()) + '-' + str(month()) + '-' + str(day()) + '_' + str(hour()) + str(minute()) + str(second()), 'png')
+  }
   
 }
 
