@@ -1210,7 +1210,7 @@ function setup() {
 // ******************************* Draw Function *******************************//
 function draw() {
   // Build the background using a halo effect and the face color
-  background(180)
+  background(255)
   var hue = chroma.hsl(frameCount % 360, 0.2, 0.6)
   fill(hue.rgb())
   textFont(myFont1, 170)

@@ -1210,7 +1210,7 @@ function setup() {
   title.innerText = repeatedText;
 }
 function draw() {
-  background(200)
+  background(230)
   var hue = chroma.hsl(frameCount % 360, 0.2, 0.6)
   noStroke()
   fill(hue.rgb())
