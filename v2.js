@@ -452,7 +452,7 @@ class axolotl{
 }
 
 function setup() {
-  let canvas = createCanvas(800, 600)
+  let canvas = createCanvas(480, 360)
   canvas.parent('canvas-container')
   
   frameRate(60)
@@ -479,17 +479,17 @@ var mouth_type = 100
 var mouth_clr = [150, 150, 150]
 
 function draw() {
-  background("white")
-  // // Build the background using a halo effect and the face color
-  // background(158)
-  // blendMode(MULTIPLY) // MULTIPLY - multiply the colors, result will always be darker
-  // var bg_clr1 = color(face_clr[0], face_clr[1], face_clr[2])
-  // noStroke()
-  // for(var i = 0; i < width*2; i+= 56){
-  //     bg_clr1.setAlpha(36)
-  //     fill(bg_clr1)
-  //     ellipse(width/2,height/2, i+mouseX)
-  // }
+  // background("white")
+  // Build the background using a halo effect and the face color
+  background(158)
+  blendMode(MULTIPLY) // MULTIPLY - multiply the colors, result will always be darker
+  var bg_clr1 = color(face_clr[0], face_clr[1], face_clr[2])
+  noStroke()
+  for(var i = 0; i < width*2; i+= 56){
+      bg_clr1.setAlpha(36)
+      fill(bg_clr1)
+      ellipse(width/2,height/2, i+mouseX)
+  }
   
   
   blendMode(BLEND) // BLEND - linear interpolation of colours: C = A*factor + B. This is the default blending mode

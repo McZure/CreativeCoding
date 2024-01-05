@@ -1296,11 +1296,8 @@ function keyPressed() {
       deco = true
     }
   }
-  if(keyCode === UP_ARROW){
-    
-  }
-  if(keyCode === DOWN_ARROW){
-    // None
+  if( key === 'S' || key === 's'){
+    saveCanvas(canvas, 'Axomon3_' + str(year()) + '-' + str(month()) + '-' + str(day()) + '_' + str(hour()) + str(minute()) + str(second()), 'png')
   }
 }
 
