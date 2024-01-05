@@ -47,3 +47,9 @@ function draw() {
     image(img,400,350, img.width/2, img.height/2);
   }
 }
+
+function keyPressed() {
+  if( key === 'S' || key === 's'){
+    saveCanvas(canvas, 'Axomon_' + str(year()) + '-' + str(month()) + '-' + str(day()) + '_' + str(hour()) + str(minute()) + str(second()), 'png')
+  }
+}
